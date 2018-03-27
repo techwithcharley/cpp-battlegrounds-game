@@ -75,13 +75,16 @@ int Map::getTiles_Size()
 void Map::UpdateTiles(string old_position, string new_position)    // Input in the form of two board coordinates e.g "A3"
 {
 	BoardToArray(old_position);
-	int old_x = coord[0];
-	int old_y = coord[1];
+	int old_y = coord[0];
+	int old_x = coord[1];
 	BoardToArray(new_position);
-	if (HasUnit[old_x][old_y] != '^' || '~') {
-		HasUnit[coord[0]][coord[1]] = HasUnit[old_x][old_y];
+	HasUnit[coord[0]][coord[1]] = HasUnit[old_y][old_x];
+	if (getTerrain(old_position) == true){
+		HasUnit[old_y][old_x] = '^';
 	}
-	HasUnit[old_x][old_y] = NULL;
+	else{
+		HasUnit[old_y][old_x] = '~';
+	}
 }
 
 void Map::setTerrain(string position, bool type)    // Input in the form of a board coordinate e.g "A3" and a boolean value
@@ -103,13 +106,11 @@ bool Map::getTerrain(string position)    // Input in the form of a board coordin
 
 	if (Terrain[coord[0]][coord[1]] == true) {    // Check if terrain at current array index is land
 		cout << "Terrain is land!" << endl;
-
 		return Terrain[coord[0]][coord[1]];
 	}
 	else if (Terrain[coord[0]][coord[1]] == false)
 	{
 			cout << "Terrain is water!" << endl;
-
 			return Terrain[coord[0]][coord[1]];    // Return value at current array index
 	}
 	else
@@ -162,8 +163,8 @@ char Map::getHasUnit(string position)    // Input in the form of a board coordin
 {
 	BoardToArray(position);    // Convert board coordinate to array index
 	return HasUnit[coord[0]][coord[1]];
-
 }
+
 bool Map::BoardToArray(string position)    // Input in the form of a board coordinate e.g "A3"
 {
 

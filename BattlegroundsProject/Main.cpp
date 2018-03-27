@@ -7,51 +7,26 @@ int main() {
 	string firecoordinate; // this is the tile the user selects to fire at
 	bool gameover = 0; // ends the game when this = 1. ie a player has no hp left in his units. 
 	bool playerhp = 0; // checks if the player has hp, if so the gameover doesn't proc.
-	bool playernumber = 0; // tells the program which player is currently playing, player 1  = 0 
+	int playernumber = 1; // tells the program which player is currently playing 
 	char stopchar; // used at the end to halt the console screen before exiting.
 	player player1; // this is the class for player 1
 	player player2; //this is the class for player 2
 	char unit_type; // char i, is used to identify the unit types, and where they are placed. 
 	
+	cout << "Player 1: Unit Placement" << endl;
 	player1.getTiles();
+	player1.setUnits(3);
 	cout << endl;
+	cout << "Player 2: Unit Placement" << endl;
 	player2.getTiles();
-
-	for (int z = 0; z <= 2; z++) // creates the units for the player, for loop broken? 
-	{
-		
-		switch (z) {  // switch statement gives values to i in place of the GUI to allow the code to work for now. 
-
-		case 0:
-			unit_type = 'I';
-			break;
-
-		case 1:
-			unit_type = 'S';
-			break;
-
-		case 2:
-			unit_type = 'P';
-			break;
-		}
-
-		cout << "Type: " << unit_type << endl;
-		//player1.settype(unit_type);
-		
-		cout << "Enter the coordinate you want the unit to be placed at, ie : A1" << endl; 
-		cin >> coordinate;  // WORKS TO HERE AT LEAST.................................................
-
-		//Returns a terrain, always land? however the boardtoarray tests still work within this.
-		// probably need to do a setterrain call at some point? to generate both maps.
-		player1.setHasUnit(coordinate, unit_type); //sets the position of this unit
-	}
+	player2.setUnits(3);
 
 	player1.getTiles();
 	player1.UpdateTiles("A5", "B2");
 	player1.getTiles();
 
 
-/*	playernumber = 1; // sets to player 2
+/*	playernumber = 2; // sets to player 2
 
 	cout << "Player 2's turn" << endl;
 

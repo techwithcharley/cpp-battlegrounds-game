@@ -11,6 +11,10 @@ player::~player()
 {
 	// Still to be implemented
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
 void player::settype(char z) { // sets 1 land, 1 sea and 1 air unit for now, to change later for more user customisation. 
 
 	switch (z) {
@@ -130,40 +134,66 @@ void player::setposition(string coordinate , char z) // sets unit position, via 
 			//break;
 	}
 }
+*/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void player::setcover(bool) // does it have cover y/n
+void player::setCover(bool covered) // does it have cover y/n
 {
-	cover = 0;
-	this->cover = cover;// to be implemented later
+	Cover = covered;// to be implemented later
 						//needs to check if there is cover 
 						//cover value needs to be added later as well 
 }
 
-void player::sethasmoved(bool) // has it moved y/n
+void player::setHasMoved(bool moved) // has it moved y/n
 {
-	this->move = move; // this function can be called with a true false input put in, within another function and or main?
+	HasMoved = moved; // this function can be called with a true false input put in, within another function and or main?
 
 }
 
-void player::setmove(int) // how much can it move staying at 1 just now. 
+void player::setMoveDistance(int dist) // how much can it move staying at 1 just now. 
 {
-	int distance = 1;
-
-	this->distance = distance;
+	MoveDistance = dist;
 }
 
-void player::sethp(int)
+void player::setHealth(int hp)
 {
-	int hp = 1;
-
-	this->hp = hp;
+	Health = hp;
 }
 
-void player::setunit(int)
+void player::setUnits(int unit)
 {
+	Units.resize(unit);
+	char unit_type;
+	string coordinate;
 
+	for (int z = 0; z < getUnits(); z++) // creates the units for the player, for loop broken? 
+	{
+		switch (z) {  // switch statement gives values to i in place of the GUI to allow the code to work for now. 
+
+		case 0:
+			unit_type = 'I';
+			break;
+
+		case 1:
+			unit_type = 'S';
+			break;
+
+		case 2:
+			unit_type = 'P';
+			break;
+		}
+
+		cout << "Type: " << unit_type << endl;
+		cout << "Enter the coordinate you want the unit to be placed at, ie : A1" << endl;
+		cin >> coordinate;
+		setHasUnit(coordinate, unit_type); //sets the position of this unit
+	}
 }
 
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/*
 string player::getype() //returns land, sea, air, needs the position to tell??
 {
 	cout << type << " unit selected. /n"; //relays unit type selected to the user
@@ -175,10 +205,13 @@ string player::getposition() //returns a string co-ordinate A2
 	cout << "unit is located at tile: " << currentposition << endl; //shows the unit location to the user and returns for the program/
 	return currentposition;
 }
+*/
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
-bool player::getcover() // returns a boolean 0 = no
+bool player::getCover() // returns a boolean 0 = no
 {
-	if (cover == 1) // if loop to inform the user whether they have taken cover or not.
+	if (Cover == true) // if loop to inform the user whether they have taken cover or not.
 	{
 		cout << "unit has cover! /n";
 	}
@@ -186,12 +219,12 @@ bool player::getcover() // returns a boolean 0 = no
 	{
 		cout << "unit has no cover! /n";
 	}
-	return cover;
+	return Cover;
 }
 
-bool player::gethasmoved() // returns if it has moved 1= if yes
+bool player::getHasMoved() // returns if it has moved 1= if yes
 {
-	if (move == 1) // if loop to inform the user that that unit has moved or not.
+	if (HasMoved == true) // if loop to inform the user that that unit has moved or not.
 	{
 		cout << "player has moved! /n";
 	}
@@ -199,22 +232,22 @@ bool player::gethasmoved() // returns if it has moved 1= if yes
 	{
 		cout << "Unit has not moved! /n";
 	}
-	return move;
+	return HasMoved;
 }
 
-int player::getmove() // returns it's move value, always 1 currently.
+int player::getMoveDistance() // returns it's move value, always 1 currently.
 {
-	cout << "unit can still move: " << distance << " tiles /n"; // tells the user the remaining unit movement.
+	cout << "unit can still move: " << MoveDistance << " tiles /n"; // tells the user the remaining unit movement.
 
-	return distance;
+	return MoveDistance;
 }
 
-int player::gethp()
+int player::getHealth()
 {
-	return hp;
+	return Health;
 }
 
-int player::getunit(int index)
+int player::getUnits()
 {
-	return index;
+	return Units.size();
 }

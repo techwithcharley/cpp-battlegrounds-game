@@ -35,28 +35,28 @@ class player : public Map {
 private:
 	string type; //used to determine the move values, so on and so forth.
 	string currentposition, newposition; // string where the position is stored, and used to send to the map to update.
-	bool cover;		//determines whether the unit has a cover value or not
-	bool move; // used in hasmoved to define whether the unit has moved or not this turn
-	int distance, i, hp; //i is used for the array of units needed to populate the map.
-	vector <string> units[3]; // double check dynamic memory allocation for vectors.
+	bool Cover;		//determines whether the unit has a cover value or not
+	bool HasMoved; // used in hasmoved to define whether the unit has moved or not this turn
+	int MoveDistance, i, Health; //i is used for the array of units needed to populate the map.
+	vector <string> Units; // double check dynamic memory allocation for vectors.
 
 public:
 	player();
 	virtual ~player();
-	void settype(char); // land, sea, air
-	void setposition(string, char); // co-ordinate A2 to the int unit, ie unit 2 
-	void setcover(bool); // does it have cover y/n
-	void sethasmoved(bool); // has it moved y/n
-	void setmove(int); // how much can it move (1)
-	void sethp(int); // sets the ho of the unit, ie if it has been hit or not. Always going to be 1 in the current dev stage
-	void setunit(int); // sets the units in the beginning.
-	string getype(); //returns land, sea, air, needs the position?
-	string getposition(); //returns a string co-ordinate A2 
-	bool getcover(); // returns a boolean 1= yes
-	bool gethasmoved(); // returns if it has moved 1= yes
-	int getmove(); // returns it's move value, always 1 currently.
-	int gethp(); //function returns the hp value of the unit, if it is 0 the unit is dead.
-	int getunit(int); // returns something about the unit number in the vector.
+	void setType(char); // land, sea, air
+	void setPosition(string, char); // co-ordinate A2 to the int unit, ie unit 2 
+	void setCover(bool); // does it have cover y/n
+	void setHasMoved(bool); // has it moved y/n
+	void setMoveDistance(int); // how much can it move (1)
+	void setHealth(int); // sets the ho of the unit, ie if it has been hit or not. Always going to be 1 in the current dev stage
+	void setUnits(int); // sets the units in the beginning.
+	string getType(); //returns land, sea, air, needs the position?
+	string getPosition(); //returns a string co-ordinate A2 
+	bool getCover(); // returns a boolean 1= yes
+	bool getHasMoved(); // returns if it has moved 1= yes
+	int getMoveDistance(); // returns it's move value, always 1 currently.
+	int getHealth(); //function returns the hp value of the unit, if it is 0 the unit is dead.
+	int getUnits(); // returns something about the unit number in the vector.
 	
 };
 #endif
