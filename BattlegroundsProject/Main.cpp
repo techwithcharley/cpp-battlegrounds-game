@@ -16,14 +16,15 @@ int main() {
 	cout << "Player 1: Unit Placement" << endl;
 	player1.getTiles();
 	player1.setUnits(3);
-	cout << endl;
-	cout << "Player 2: Unit Placement" << endl;
+
+	cout << endl << "Player 2: Unit Placement" << endl;
 	player2.getTiles();
 	player2.setUnits(3);
 
+	cout << "Player 1's turn:" << endl;
 	player1.getTiles();
-	player1.UpdateTiles("A5", "B2");
-	player1.getTiles();
+	//player1.UpdateTiles("A5", "B2");
+	//player1.getTiles();
 
 
 /*	playernumber = 2; // sets to player 2
