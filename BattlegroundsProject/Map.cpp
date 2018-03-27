@@ -184,10 +184,3 @@ bool Map::BoardToArray(string position)    // Input in the form of a board coord
 			return false;
 		}
 }
-
-
-// ADDITIONAL COMMENTS.
-/* Currently stuck at the sea verification,  the coordinate from the map generated is apparently always returning true, ie land
-even when it shouldn't be. 
-How to fix this? 
-*/

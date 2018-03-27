@@ -5,8 +5,10 @@ int main() {
 	string coordinate; //this is used for validating a co-ordinate input from a user might need to be a pointer 
 	string playerturn;  //this is used to determine what the player would like to do with their turn, ie fire, move...
 	string firecoordinate; // this is the tile the user selects to fire at
+	string old_coordinate, new_coordinate; // these are the coordinates used for the moving of units by players.
 	bool gameover = 0; // ends the game when this = 1. ie a player has no hp left in his units. 
 	bool playerhp = 0; // checks if the player has hp, if so the gameover doesn't proc.
+	bool playermoved;// set to see if the player has moved within their turn.
 	int playernumber = 1; // tells the program which player is currently playing 
 	char stopchar; // used at the end to halt the console screen before exiting.
 	player player1; // this is the class for player 1
@@ -36,24 +38,30 @@ int main() {
 /*	while (gameover == 0)
 	{
 		cout << "Player 1's turn:" << endl;
+		playermoved = 0;
 		player1.getTiles();
 
 		cout << "Player 1 turn" << endl; //outputs to the console, who's turn it is, NO CHEATING!!!
 		playernumber = 0; //sets to player 1
-
+		
 		cout << "What would you like to do this turn?" << endl;
 		cout << "select a number:/n [1] move a unit. /n [2] fire a shot. " << endl; // maybe add more than fire or move?
 		getline(cin, playerturn); // needs validation,
 
 		if (playerturn == "1")
 		{
-			//need something in here to make it obvious which unit to move?
+			cout << "Enter the coordinate of the unit you want to move: " << endl;
+			cin >> old_coordinate;
+			cout << "Enter the coordinate you want the unit to move to" << endl;
+			cin >> new_coordinate;
+			player1.UpdateTiles(old_coordinate, new_coordinate);
+			player1.setHasMoved(playermoved); // sets that the player will have moved
 		}
 		else // currently an else due to there only being 2 options.
 		{
 			cout << " Where would you like to fire?" << endl;
 			cout << " Please enter a co-ordinate, such as A3 " << endl; // section needs to check if there is a unit, adn also update hp if there is. something to do wtih cover later on as well. 
-			getline(cin, firecoordinate); // ALSO NEEDS VALIDATION.
+			cin >> firecoordinate; // needs a function that changes the tiles from a unit being present to being null.ss
 		}
 
 		for (int i = 0; i = 2; i++) //iterates through the other player's units, checking if any of them have hp left.
