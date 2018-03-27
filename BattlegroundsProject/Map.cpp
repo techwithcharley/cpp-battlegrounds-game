@@ -81,10 +81,7 @@ void Map::UpdateTiles(string old_position, string new_position)    // Input in t
 	if (HasUnit[old_x][old_y] != '^' || '~') {
 		HasUnit[coord[0]][coord[1]] = HasUnit[old_x][old_y];
 	}
-	if (getTerrain(old_position) == true) {
-		HasUnit[old_x][old_y] = '^';
-	}else
-		HasUnit[old_x][old_y] = '~';
+	HasUnit[old_x][old_y] = NULL;
 }
 
 void Map::setTerrain(string position, bool type)    // Input in the form of a board coordinate e.g "A3" and a boolean value
@@ -122,14 +119,48 @@ bool Map::getTerrain(string position)    // Input in the form of a board coordin
 }
 void Map::setHasUnit(string position, char type)    // Input in the form of a board coordinate e.g "A3" and a boolean value
 {
-	BoardToArray(position);		// Convert board coordinate to array index
-	HasUnit[coord[0]][coord[1]] = type;    // Set value at array index to variable type
+	// WILL NEED TO MAKE THIS A FUNCTION TO CALL LATER ON
+	//////////////////////////////////////////////////////////////////////////////
+	switch (type){
+	case 'I':
+		while (getTerrain(position) != true){
+			cout << "Error! Invalid terrain, please enter a new coordinate: ";
+			cin >> position;
+
+			while (getHasUnit(position) != NULL){
+				cout << "Error! Tile already taken, please enter a new coordinate: ";
+				cin >> position;
+			}
+		}
+		HasUnit[coord[0]][coord[1]] = type;
+		break;
+
+	case 'S':
+		while (getTerrain(position) != false){
+			cout << "Error! Invalid terrain, please enter a new coordinate: ";
+			cin >> position;
+
+			while (getHasUnit(position) != NULL){
+				cout << "Error! Tile already taken, please enter a new coordinate: ";
+				cin >> position;
+			}
+		}
+		HasUnit[coord[0]][coord[1]] = type;
+		break;
+
+	case 'P':
+		while (getHasUnit(position) != NULL){
+			cout << "Error! Tile already taken, please enter a new coordinate: ";
+			cin >> position;
+		}
+		HasUnit[coord[0]][coord[1]] = type;
+		break;
+	}
 }
 
 char Map::getHasUnit(string position)    // Input in the form of a board coordinate e.g "A3"
 {
 	BoardToArray(position);    // Convert board coordinate to array index
-
 	return HasUnit[coord[0]][coord[1]];
 
 }

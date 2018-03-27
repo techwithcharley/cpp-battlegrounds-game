@@ -36,7 +36,7 @@ int main() {
 		}
 
 		cout << "Type: " << unit_type << endl;
-		player1.settype(unit_type);
+		//player1.settype(unit_type);
 		
 		cout << "Enter the coordinate you want the unit to be placed at, ie : A1" << endl; 
 		cin >> coordinate;  // WORKS TO HERE AT LEAST.................................................
