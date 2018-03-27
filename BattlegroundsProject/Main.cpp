@@ -14,7 +14,7 @@ int main() {
 	
 	cout << "Player 1: Unit Placement" << endl;
 	player1.getTiles();
-	player1.setUnits(3);
+	player1.setUnits(5);
 	player1.getTiles();
 	cout << "Enter a character to end turn: ";
 	cin >> stopchar;
@@ -30,7 +30,10 @@ int main() {
 	system("CLS");
 	cout << flush;
 
-	while (gameover == 0)
+	player1.setCover("A3", true);
+	cout << "Cover: " << player1.getCover("A3") << endl;
+
+/*	while (gameover == 0)
 	{
 		cout << "Player 1's turn:" << endl;
 		player1.getTiles();
