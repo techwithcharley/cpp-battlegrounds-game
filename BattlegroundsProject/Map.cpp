@@ -80,11 +80,12 @@ void Map::UpdateTiles(string old_position, string new_position)    // Input in t
 	BoardToArray(new_position);
 	HasUnit[coord[0]][coord[1]] = HasUnit[old_y][old_x];
 	if (getTerrain(old_position) == true){
-		HasUnit[old_y][old_x] = '^';
+		Tiles[old_y][old_x] = '^';
 	}
 	else{
-		HasUnit[old_y][old_x] = '~';
+		Tiles[old_y][old_x] = '~';
 	}
+	HasUnit[old_y][old_x] = NULL;
 }
 
 void Map::setTerrain(string position, bool type)    // Input in the form of a board coordinate e.g "A3" and a boolean value

@@ -11,38 +11,29 @@ int main() {
 	char stopchar; // used at the end to halt the console screen before exiting.
 	player player1; // this is the class for player 1
 	player player2; //this is the class for player 2
-	char unit_type; // char i, is used to identify the unit types, and where they are placed. 
 	
 	cout << "Player 1: Unit Placement" << endl;
 	player1.getTiles();
 	player1.setUnits(3);
+	player1.getTiles();
+	cout << "Enter a character to end turn: ";
+	cin >> stopchar;
+	system("CLS");
+	cout << flush;
+
 
 	cout << endl << "Player 2: Unit Placement" << endl;
 	player2.getTiles();
 	player2.setUnits(3);
+	cout << "Enter a character to end turn: ";
+	cin >> stopchar;
+	system("CLS");
+	cout << flush;
 
-	cout << "Player 1's turn:" << endl;
-	player1.getTiles();
-	//player1.UpdateTiles("A5", "B2");
-	//player1.getTiles();
-
-
-/*	playernumber = 2; // sets to player 2
-
-	cout << "Player 2's turn" << endl;
-
-	for (int z = 0; z <= 2; z++) //creates the units for the player
+	while (gameover == 0)
 	{
-		
-		player2.settype(i); //sets the unit type for player 2 
-		player2.setposition(coordinate, i);  //sets the position of this unit
-	}
-	// need a vector for the units, so vector player 1 <unit> and a similar one for player 2 
-
-	// need code to start a player turn.
-	// put a while loop in here?
-	while (gameover == 0);
-	{
+		cout << "Player 1's turn:" << endl;
+		player1.getTiles();
 
 		cout << "Player 1 turn" << endl; //outputs to the console, who's turn it is, NO CHEATING!!!
 		playernumber = 0; //sets to player 1
