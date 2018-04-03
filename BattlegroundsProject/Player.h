@@ -52,10 +52,12 @@ public:
 	void setUnits(int); // sets the units in the beginning.
 	bool getCover(string); // returns a boolean 1= yes
 	bool getHasMoved(); // returns if it has moved 1= yes
-	int getMoveDistance(); // returns it's move value, always 1 currently.
+	bool DistanceVerify(string, string);
+	bool TerrainVerify(string, string);
 	int getHealth(); //function returns the hp value of the unit, if it is 0 the unit is dead.
 	int getUnits(); // returns something about the unit number in the vector.
 	void PlayerTurn();
 	void PlayerAttacked(string);
+	void PlayerMove(string, string);
 };
 #endif

@@ -6,8 +6,6 @@ int main() {
 	string playerturn;  //this is used to determine what the player would like to do with their turn, ie fire, move...
 	string firecoordinate; // this is the tile the user selects to fire at
 	string old_coordinate, new_coordinate; // these are the coordinates used for the moving of units by players.
-	bool gameover = 0; // ends the game when this = 1. ie a player has no hp left in his units. 
-	bool playerhp = 0; // checks if the player has hp, if so the gameover doesn't proc.
 	int playernumber = 1; // tells the program which player is currently playing 
 	char stopchar; // used at the end to halt the console screen before exiting.
 	player player1; // this is the class for player 1
@@ -16,6 +14,8 @@ int main() {
 	cout << "Player 1: Unit Placement" << endl;
 	player1.getTiles();
 	player1.setUnits(3);
+	player1.getTiles();
+	player1.PlayerMove("A5", "A6");
 	player1.getTiles();
 	cout << "Enter a character to end turn: ";
 	cin >> stopchar;
@@ -33,7 +33,7 @@ int main() {
 	cout << flush;
 
 	while (player1.CheckEndGame() == false && player2.CheckEndGame() == false) {
-		player1.PlayerAttacked("A3");
+		
 	}
 
 	/*while (player1.CheckEndGame() == false && player2.CheckEndGame() == false)

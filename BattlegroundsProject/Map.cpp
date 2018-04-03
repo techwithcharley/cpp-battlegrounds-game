@@ -78,11 +78,13 @@ void Map::UpdateTiles(string old_position, string new_position)    // Input in t
 	int old_y = coord[0];
 	int old_x = coord[1];
 	BoardToArray(new_position);
+		
 	HasUnit[coord[0]][coord[1]] = HasUnit[old_y][old_x];
-	if (getTerrain(old_position) == true){
+
+	if (getTerrain(old_position) == true) {
 		Tiles[old_y][old_x] = '^';
 	}
-	else{
+	else {
 		Tiles[old_y][old_x] = '~';
 	}
 	HasUnit[old_y][old_x] = NULL;
