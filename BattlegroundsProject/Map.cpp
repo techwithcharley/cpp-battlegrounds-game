@@ -121,8 +121,6 @@ bool Map::getTerrain(string position)    // Input in the form of a board coordin
 }
 void Map::setHasUnit(string position, char type)    // Input in the form of a board coordinate e.g "A3" and a boolean value
 {
-	// WILL NEED TO MAKE THIS A FUNCTION TO CALL LATER ON
-	//////////////////////////////////////////////////////////////////////////////
 	switch (type){
 	case 'I':
 		while (getTerrain(position) != true){
@@ -157,6 +155,9 @@ void Map::setHasUnit(string position, char type)    // Input in the form of a bo
 		}
 		HasUnit[coord[0]][coord[1]] = type;
 		break;
+
+	case NULL:
+		HasUnit[coord[0]][coord[1]] = type;
 	}
 }
 
@@ -164,6 +165,26 @@ char Map::getHasUnit(string position)    // Input in the form of a board coordin
 {
 	BoardToArray(position);    // Convert board coordinate to array index
 	return HasUnit[coord[0]][coord[1]];
+}
+
+bool Map::CheckEndGame()
+{
+	int count = 0;
+	for (int x = 0; x < getTiles_Size(); x++) {
+		for (int y = 0; y < getTiles_Size(); y++) {
+			if (HasUnit[x][y] != NULL) {
+				count++;
+			}
+		}
+	}
+	cout << "Count: " << count << endl;
+	if (count == 0) {
+		cout << "End Game reached..." << endl;
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 bool Map::BoardToArray(string position)    // Input in the form of a board coordinate e.g "A3"

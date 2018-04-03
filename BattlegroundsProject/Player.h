@@ -28,6 +28,7 @@ public:
 	bool getTerrain(string);	// Method to access the data of a specific tile's terrain type
 	void setHasUnit(string, char);	// Method to set members of the HasUnit array
 	char getHasUnit(string);	// Method to test if a specific tile contains a unit
+	bool CheckEndGame();
 	bool BoardToArray(string);	// Method to convert the game board coordinated to array indices
 };
 
@@ -44,20 +45,17 @@ private:
 public:
 	player();
 	virtual ~player();
-	void setType(char); // land, sea, air
-	void setPosition(string, char); // co-ordinate A2 to the int unit, ie unit 2 
 	void setCover(string, bool); // does it have cover y/n
 	void setHasMoved(bool); // has it moved y/n
 	void setMoveDistance(string, string); // how much can it move (1)
 	void setHealth(int); // sets the ho of the unit, ie if it has been hit or not. Always going to be 1 in the current dev stage
 	void setUnits(int); // sets the units in the beginning.
-	string getType(); //returns land, sea, air, needs the position?
-	string getPosition(); //returns a string co-ordinate A2 
 	bool getCover(string); // returns a boolean 1= yes
 	bool getHasMoved(); // returns if it has moved 1= yes
 	int getMoveDistance(); // returns it's move value, always 1 currently.
 	int getHealth(); //function returns the hp value of the unit, if it is 0 the unit is dead.
 	int getUnits(); // returns something about the unit number in the vector.
-	void Attack(string);
+	void PlayerTurn();
+	void PlayerAttacked(string);
 };
 #endif

@@ -8,7 +8,6 @@ int main() {
 	string old_coordinate, new_coordinate; // these are the coordinates used for the moving of units by players.
 	bool gameover = 0; // ends the game when this = 1. ie a player has no hp left in his units. 
 	bool playerhp = 0; // checks if the player has hp, if so the gameover doesn't proc.
-	bool playermoved;// set to see if the player has moved within their turn.
 	int playernumber = 1; // tells the program which player is currently playing 
 	char stopchar; // used at the end to halt the console screen before exiting.
 	player player1; // this is the class for player 1
@@ -16,7 +15,7 @@ int main() {
 	
 	cout << "Player 1: Unit Placement" << endl;
 	player1.getTiles();
-	player1.setUnits(5);
+	player1.setUnits(3);
 	player1.getTiles();
 	cout << "Enter a character to end turn: ";
 	cin >> stopchar;
@@ -27,18 +26,19 @@ int main() {
 	cout << endl << "Player 2: Unit Placement" << endl;
 	player2.getTiles();
 	player2.setUnits(3);
+	player2.getTiles();
 	cout << "Enter a character to end turn: ";
 	cin >> stopchar;
 	system("CLS");
 	cout << flush;
 
-	player1.setCover("A3", true);
-	cout << "Cover: " << player1.getCover("A3") << endl;
+	while (player1.CheckEndGame() == false && player2.CheckEndGame() == false) {
+		player1.PlayerAttacked("A3");
+	}
 
-/*	while (gameover == 0)
+	/*while (player1.CheckEndGame() == false && player2.CheckEndGame() == false)
 	{
 		cout << "Player 1's turn:" << endl;
-		playermoved = 0;
 		player1.getTiles();
 
 		cout << "Player 1 turn" << endl; //outputs to the console, who's turn it is, NO CHEATING!!!
@@ -50,12 +50,12 @@ int main() {
 
 		if (playerturn == "1")
 		{
-			cout << "Enter the coordinate of the unit you want to move: " << endl;
+			cout << "Enter the coordinate of the unit you want to move: ";
 			cin >> old_coordinate;
-			cout << "Enter the coordinate you want the unit to move to" << endl;
+			cout << "Enter the coordinate you want the unit to move to: ";
 			cin >> new_coordinate;
 			player1.UpdateTiles(old_coordinate, new_coordinate);
-			player1.setHasMoved(playermoved); // sets that the player will have moved
+			player1.setHasMoved(true); // sets that the player will have moved
 		}
 		else // currently an else due to there only being 2 options.
 		{
@@ -64,7 +64,7 @@ int main() {
 			cin >> firecoordinate; // needs a function that changes the tiles from a unit being present to being null.ss
 		}
 
-		for (int i = 0; i = 2; i++) //iterates through the other player's units, checking if any of them have hp left.
+		for (int i = 0; i < player1.getUnits(); i++) //iterates through the other player's units, checking if any of them have hp left.
 		{
 			int temp;
 
@@ -96,7 +96,7 @@ int main() {
 		cout << "select a number:/n [1] move a unit. /n [2] fire a shot." << endl; // maybe add more than fire or move?
 		getline(cin, playerturn); // needs validation,
 
-		if (playerturn == "1")
+		/*if (playerturn == "2")
 		{
 			//need something in here to make it obvious which unit to move?
 		}

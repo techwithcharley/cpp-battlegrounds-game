@@ -106,3 +106,17 @@ int player::getUnits()
 {
 	return Units.size();
 }
+
+void player::PlayerTurn()
+{
+}
+
+void player::PlayerAttacked(string target)
+{
+	if (getHasUnit(target) == 'I' || 'S' || 'P') {
+		setHasUnit(target, NULL);
+	}
+	else {
+		cout << "Attack missed..." << endl;
+	}
+}
