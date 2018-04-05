@@ -58,6 +58,6 @@ public:
 	int getUnits(); // returns something about the unit number in the vector.
 	void PlayerTurn();
 	void PlayerAttacked(string);
-	void PlayerMove(string, string);
+	bool PlayerMove(string, string);
 };
 #endif

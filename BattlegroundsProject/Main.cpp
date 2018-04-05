@@ -14,9 +14,26 @@ int main() {
 	cout << "Player 1: Unit Placement" << endl;
 	player1.getTiles();
 	player1.setUnits(3);
+	system("CLS");
 	player1.getTiles();
-	player1.PlayerMove("A5", "A6");
+
+	cout << "Moving a unit." << endl;
+	cout << "Please enter the coordinate of the unit you want to move." << endl;
+	cin >> old_coordinate;
+	cout << "Please enter the coordinate you would like to move to" << endl;
+	cin >> new_coordinate;
+
+	while (player1.PlayerMove(old_coordinate, new_coordinate) == 0)
+	{
+		cout << "Please re-enter the coordinate of the unit you want to move." << endl;
+		cin >> old_coordinate;
+		cout << "Please enter the coordinate you woulod like to move to" << endl;
+		cin >> new_coordinate;
+		player1.PlayerMove(old_coordinate, new_coordinate);
+	}
+
 	player1.getTiles();
+
 	cout << "Enter a character to end turn: ";
 	cin >> stopchar;
 	system("CLS");

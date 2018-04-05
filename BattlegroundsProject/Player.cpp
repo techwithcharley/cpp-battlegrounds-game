@@ -16,7 +16,7 @@ player::~player()
 	// Still to be implemented
 }
 
-void player::setCover(string position, bool value) // does it have cover y/n
+void player::setCover(string position, bool value) // does it have cover? value associated? 
 {
 	BoardToArray(position);
 	Cover[coord[0]][coord[1]] = value;
@@ -27,7 +27,7 @@ void player::setHasMoved(bool moved) // has it moved y/n
 	HasMoved = moved; // this function can be called with a true false input put in, within another function and or main?
 }
 
-void player::setMoveDistance(string old_pos, string new_pos) // how much can it move staying at 1 just now. 
+void player::setMoveDistance(string old_pos, string new_pos) // how much can it move staying at 1 just now.
 {
 	MoveDistance = 1;
 
@@ -77,15 +77,15 @@ bool player::getCover(string position) // returns a boolean 0 = no
 	return Cover[coord[0]][coord[1]];
 }
 
-bool player::getHasMoved() // returns if it has moved 1= if yes
+bool player::getHasMoved() // returns if it has moved 1b= if yes
 {
 	if (HasMoved == true) // if loop to inform the user that that unit has moved or not.
 	{
-		cout << "player has moved! /n";
+		cout << "player has moved! \n";
 	}
 	else
 	{
-		cout << "Unit has not moved! /n";
+		cout << "Unit has not moved! \n";
 	}
 	return HasMoved;
 }
@@ -155,11 +155,27 @@ void player::PlayerAttacked(string target) // Method called when opponent attack
 	}
 }
 
-void player::PlayerMove(string old_pos, string new_pos) // Method for user to move
+bool player::PlayerMove(string old_pos, string new_pos) // Method for user to move
 {
-	if (DistanceVerify(old_pos, new_pos) == true) {
-		if (TerrainVerify(old_pos, new_pos) == true) {
-			UpdateTiles(old_pos, new_pos);
+		if (getHasUnit(old_pos) != NULL) { // should fix the being able to move no unit to somewhere. 
+			if (DistanceVerify(old_pos, new_pos) == true) {
+				if (TerrainVerify(old_pos, new_pos) == true) {
+					UpdateTiles(old_pos, new_pos);
+					return 1;
+				}
+				else {
+					cout << "wrong terrain selected to move to" << endl;
+					return 0;
+				}
+			}
+			else {
+				cout << "distance is too far" << endl;
+				return 0;
+			}
+		}
+		else {
+			cout << "no unit present at the coordinate" << endl;
+			return 0;
 		}
 	}
-}
+// problem appears to be somewhat based on the old_pos not updating to the new coordinate entered in deeper checks.
