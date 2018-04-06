@@ -23,13 +23,14 @@ int main() {
 	cout << "Please enter the coordinate you would like to move to" << endl;
 	cin >> new_coordinate;
 
-	while (player1.PlayerMove(old_coordinate, new_coordinate) == 0)
+	//player1.PlayerMove(old_coordinate, new_coordinate);
+
+	while (player1.PlayerMove(old_coordinate, new_coordinate) == false)
 	{
-		cout << "Please re-enter the coordinate of the unit you want to move." << endl;
+		cout << "Please re-enter the coordinate of the unit you want to move: ";
 		cin >> old_coordinate;
-		cout << "Please enter the coordinate you woulod like to move to" << endl;
+		cout << "Please enter the coordinate you would like to move to: ";
 		cin >> new_coordinate;
-		player1.PlayerMove(old_coordinate, new_coordinate);
 	}
 
 	player1.getTiles();

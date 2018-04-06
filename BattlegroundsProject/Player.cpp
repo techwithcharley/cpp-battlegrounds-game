@@ -19,7 +19,7 @@ player::~player()
 void player::setCover(string position, bool value) // does it have cover? value associated? 
 {
 	BoardToArray(position);
-	Cover[coord[0]][coord[1]] = value;
+	Cover[getCoord(0)][getCoord(1)] = value;
 }
 
 void player::setHasMoved(bool moved) // has it moved y/n
@@ -74,7 +74,7 @@ void player::setUnits(int unit)
 bool player::getCover(string position) // returns a boolean 0 = no
 {
 	BoardToArray(position);
-	return Cover[coord[0]][coord[1]];
+	return Cover[getCoord(0)][getCoord(1)];
 }
 
 bool player::getHasMoved() // returns if it has moved 1b= if yes
@@ -93,16 +93,15 @@ bool player::getHasMoved() // returns if it has moved 1b= if yes
 bool player::DistanceVerify(string old_pos, string new_pos) // Verifies that the user is only moving one tile
 {
 	BoardToArray(old_pos);
-	int old_y = coord[0];
-	int old_x = coord[1];
+	int old_y = getCoord(0);
+	int old_x = getCoord(1);
 	BoardToArray(new_pos);
-	int diff_sum = (coord[0] + coord[1]) - (old_x + old_y);
+	int diff_sum = (getCoord(0) + getCoord(1)) - (old_x + old_y);
+	cout << "diff_sum: " << diff_sum << endl;
 
-	while (diff_sum > 1 || diff_sum < -1) {
+	if ((diff_sum > 1) || (diff_sum < -1)) {
 		cout << "Unit cannot move that far, please enter a new coordinate: ";
-		cin >> new_pos;
-		BoardToArray(new_pos);
-		diff_sum = (coord[0] + coord[1]) - (old_x + old_y);
+		return false;
 	}
 	return true;
 }
@@ -111,16 +110,16 @@ bool player::TerrainVerify(string old_pos, string new_pos)
 {
 	switch (getHasUnit(old_pos)) {
 	case 'I':
-		while (getTerrain(new_pos) != true) {
-			cout << "Error! Invalid terrain, please enter a new coordinate: ";
-			cin >> new_pos;
+		if (getTerrain(new_pos) != true) {
+			cout << "Error! Invalid terrain...";
+			return false;
 		}
 		break;
 
 	case 'S':
-		while (getTerrain(new_pos) != false) {
-			cout << "Error! Invalid terrain, please enter a new coordinate: ";
-			cin >> new_pos;
+		if (getTerrain(new_pos) != false) {
+			cout << "Error! Invalid terrain...";
+			return false;
 		}
 		break;
 
@@ -157,25 +156,18 @@ void player::PlayerAttacked(string target) // Method called when opponent attack
 
 bool player::PlayerMove(string old_pos, string new_pos) // Method for user to move
 {
-		if (getHasUnit(old_pos) != NULL) { // should fix the being able to move no unit to somewhere. 
-			if (DistanceVerify(old_pos, new_pos) == true) {
-				if (TerrainVerify(old_pos, new_pos) == true) {
-					UpdateTiles(old_pos, new_pos);
-					return 1;
-				}
-				else {
-					cout << "wrong terrain selected to move to" << endl;
-					return 0;
-				}
-			}
-			else {
-				cout << "distance is too far" << endl;
-				return 0;
-			}
+	if (getHasUnit(old_pos) != NULL) { // should fix the being able to move no unit to somewhere. 
+		if (DistanceVerify(old_pos, new_pos) == true && TerrainVerify(old_pos, new_pos) == true) {
+			UpdateTiles(old_pos, new_pos);
+			return true;
 		}
 		else {
-			cout << "no unit present at the coordinate" << endl;
-			return 0;
+			cout << "Verification failure, please re-enter coordinates..." << endl;
+			return false;
 		}
 	}
-// problem appears to be somewhat based on the old_pos not updating to the new coordinate entered in deeper checks.
+	else {
+		cout << "no unit present at the coordinate" << endl;
+		return false;
+	}
+}

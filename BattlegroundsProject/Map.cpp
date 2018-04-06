@@ -87,7 +87,10 @@ void Map::UpdateTiles(string old_position, string new_position)    // Input in t
 	else {
 		Tiles[old_y][old_x] = '~';
 	}
-	HasUnit[old_y][old_x] = NULL;
+
+	if (old_position != new_position) {
+		HasUnit[old_y][old_x] = NULL;
+	}
 }
 
 void Map::setTerrain(string position, bool type)    // Input in the form of a board coordinate e.g "A3" and a boolean value
@@ -167,6 +170,17 @@ char Map::getHasUnit(string position)    // Input in the form of a board coordin
 {
 	BoardToArray(position);    // Convert board coordinate to array index
 	return HasUnit[coord[0]][coord[1]];
+}
+
+void Map::setCoord(int coord_y, int coord_x)
+{
+	coord[0] = coord_y;
+	coord[1] = coord_x;
+}
+
+int Map::getCoord(int index)
+{
+	return coord[index];
 }
 
 bool Map::CheckEndGame()

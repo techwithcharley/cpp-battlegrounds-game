@@ -28,6 +28,8 @@ public:
 	bool getTerrain(string);	// Method to access the data of a specific tile's terrain type
 	void setHasUnit(string, char);	// Method to set members of the HasUnit array
 	char getHasUnit(string);	// Method to test if a specific tile contains a unit
+	void setCoord(int, int);
+	int getCoord(int);
 	bool CheckEndGame();
 	bool BoardToArray(string);	// Method to convert the game board coordinated to array indices
 };
@@ -35,12 +37,11 @@ public:
 class player : public Map {
 private:
 	string type; //used to determine the move values, so on and so forth.
-	string currentposition, newposition; // string where the position is stored, and used to send to the map to update.
+	//string currentposition, newposition; // string where the position is stored, and used to send to the map to update.
 	vector<vector<bool>> Cover;		//determines whether the unit has a cover value or not
 	bool HasMoved; // used in hasmoved to define whether the unit has moved or not this turn
 	int MoveDistance, i, Health; //i is used for the array of units needed to populate the map.
 	vector <string> Units; // double check dynamic memory allocation for vectors.
-	int coord[2];
 
 public:
 	player();
