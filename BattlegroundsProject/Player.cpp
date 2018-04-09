@@ -145,18 +145,23 @@ void player::PlayerTurn()
 }
 
 void player::PlayerAttacked(string target) // Method called when opponent attacks a tile
-{
-	if (getHasUnit(target) == 'I' || 'S' || 'P') {
-		setHasUnit(target, NULL);
+{ // might need to loop it as a boolean in main? not sure.
+	if (BoardToArray(target) == true)
+	{
+		if (getHasUnit(target) == 'I' || 'S' || 'P') {
+			setHasUnit(target, NULL);
+		}
+		else {
+			cout << "Attack missed..." << endl;
+		}
 	}
-	else {
-		cout << "Attack missed..." << endl;
-	}
+	else 
+
 }
 
 bool player::PlayerMove(string old_pos, string new_pos) // Method for user to move
 {
-	if (getHasUnit(old_pos) != NULL) { // should fix the being able to move no unit to somewhere. 
+	if (getHasUnit(old_pos) != NULL) { 
 		if (DistanceVerify(old_pos, new_pos) == true && TerrainVerify(old_pos, new_pos) == true) {
 			UpdateTiles(old_pos, new_pos);
 			return true;

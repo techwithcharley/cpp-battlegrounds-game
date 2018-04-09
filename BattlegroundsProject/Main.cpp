@@ -35,6 +35,12 @@ int main() {
 
 	player1.getTiles();
 
+	cout << "attacking other player" << endl;
+	cout << "enter the coordinate you would like to attack" << endl;
+	cin >> firecoordinate; 
+
+	player2.PlayerAttacked(firecoordinate); // starting to make attempts at working in the firing, to finish the game up
+
 	cout << "Enter a character to end turn: ";
 	cin >> stopchar;
 	system("CLS");
