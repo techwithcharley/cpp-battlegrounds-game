@@ -142,6 +142,27 @@ int player::getUnits()
 
 void player::PlayerTurn()
 {
+	string playerturn, old_coordinate, new_coordinate, target;
+
+	cout << "What would you like to do this turn?" << endl;
+	cout << "select a number:/n [1] move a unit. /n [2] fire a shot. " << endl; // maybe add more than fire or move?
+	getline(cin, playerturn); // needs validation,
+
+	if (playerturn == "1") {
+		cout << "Enter the coordinate of the unit you want to move: ";
+		cin >> old_coordinate;
+		cout << "Enter the coordinate you want the unit to move to: ";
+		cin >> new_coordinate;
+		PlayerMove(old_coordinate, new_coordinate);
+		setHasMoved(true); // sets that the player will have moved
+	}
+	else if (playerturn == "2") {
+		cout << "enter the coordinate to target: ";
+		cin >> target;
+	}
+	else {
+		cout << "Invalid command entered..." << endl;
+	}
 }
 
 void player::PlayerAttacked(string target) // Method called when opponent attacks a tile
@@ -149,6 +170,7 @@ void player::PlayerAttacked(string target) // Method called when opponent attack
 	if (BoardToArray(target) == true)
 	{
 		if (getHasUnit(target) == 'I' || 'S' || 'P') {
+			cout << "Hit!" << endl;
 			setHasUnit(target, NULL);
 		}
 		else {
