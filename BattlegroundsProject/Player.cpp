@@ -166,7 +166,9 @@ void player::PlayerTurn()
 }
 
 void player::PlayerAttacked(string target) // Method called when opponent attacks a tile
-{ // might need to loop it as a boolean in main? not sure.
+{ 
+	string newtarget; 
+
 	if (BoardToArray(target) == true)
 	{
 		if (getHasUnit(target) == 'I' || 'S' || 'P') {
@@ -177,8 +179,15 @@ void player::PlayerAttacked(string target) // Method called when opponent attack
 			cout << "Attack missed..." << endl;
 		}
 	}
-	else 
-
+	else
+	{
+		while (BoardToArray(newtarget) != true)
+		{
+			cout << "Please enter a valid coordinate" << endl;
+			cin >> newtarget;
+			BoardToArray(newtarget);
+		}
+	}
 }
 
 bool player::PlayerMove(string old_pos, string new_pos) // Method for user to move

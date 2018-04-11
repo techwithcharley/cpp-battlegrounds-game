@@ -1,7 +1,11 @@
-﻿  Player.cpp
-c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\player.cpp(140): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  Map.cpp
-  Main.cpp
-  Generating Code...
-c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\map.cpp(126): warning C4715: 'Map::getTerrain': not all control paths return a value
-  BattlegroundsProject.vcxproj -> C:\Users\alpha\OneDrive\Documents\GitHub\Repo\x64\Debug\BattlegroundsProject.exe
+﻿  Main.cpp
+c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\main.cpp(131): error C2143: syntax error: missing ';' before '<<'
+c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\main.cpp(131): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\main.cpp(132): error C2143: syntax error: missing ';' before '<<'
+c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\main.cpp(132): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\main.cpp(132): error C2086: 'int cout': redefinition
+  c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\main.cpp(131): note: see declaration of 'cout'
+c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\main.cpp(133): error C2143: syntax error: missing ';' before '>>'
+c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\main.cpp(133): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\main.cpp(135): error C2059: syntax error: '}'
+c:\users\alpha\onedrive\documents\github\repo\battlegroundsproject\main.cpp(135): error C2143: syntax error: missing ';' before '}'
