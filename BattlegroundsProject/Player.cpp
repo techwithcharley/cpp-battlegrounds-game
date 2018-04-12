@@ -140,28 +140,48 @@ int player::getUnits()
 	return Units.size();
 }
 
-void player::PlayerTurn()
+string player::PlayerTurn()
 {
-	string playerturn, old_coordinate, new_coordinate, target;
+	string playerturn, old_coordinate, new_coordinate, target, code;
 
 	cout << "What would you like to do this turn?" << endl;
-	cout << "select a number:/n [1] move a unit. /n [2] fire a shot. " << endl; // maybe add more than fire or move?
-	getline(cin, playerturn); // needs validation,
+	cout << "[1] Move a unit" << endl << "[2] fire at the other player" << endl << "[3] end turn" << endl;
+	cin >> playerturn; // needs validation,
 
-	if (playerturn == "1") {
+	switch (stoi(playerturn)) {
+	case 1:
 		cout << "Enter the coordinate of the unit you want to move: ";
 		cin >> old_coordinate;
 		cout << "Enter the coordinate you want the unit to move to: ";
 		cin >> new_coordinate;
-		PlayerMove(old_coordinate, new_coordinate);
+		while (PlayerMove(old_coordinate, new_coordinate) == false) {
+			cout << "Enter the coordinate of the unit you want to move: ";
+			cin >> old_coordinate;
+			cout << "Enter the coordinate you want the unit to move to: ";
+			cin >> new_coordinate;
+		}
 		setHasMoved(true); // sets that the player will have moved
-	}
-	else if (playerturn == "2") {
+		code = "move";
+		return code;
+		break;
+
+	case 2:
 		cout << "enter the coordinate to target: ";
 		cin >> target;
-	}
-	else {
+		return target;
+		break;
+
+	case 3:
+		cout << "Turn ended..." << endl;
+		code = "endturn";
+		return code;
+		break;
+
+	default:
 		cout << "Invalid command entered..." << endl;
+		code = "error";
+		return code;
+		break;
 	}
 }
 
@@ -171,9 +191,10 @@ void player::PlayerAttacked(string target) // Method called when opponent attack
 
 	if (BoardToArray(target) == true)
 	{
-		if (getHasUnit(target) == 'I' || 'S' || 'P') {
+		if (getHasUnit(target) != NULL) {
 			cout << "Hit!" << endl;
 			setHasUnit(target, NULL);
+			setTiles(target, 'X');
 		}
 		else {
 			cout << "Attack missed..." << endl;
@@ -183,7 +204,7 @@ void player::PlayerAttacked(string target) // Method called when opponent attack
 	{
 		while (BoardToArray(newtarget) != true)
 		{
-			cout << "Please enter a valid coordinate" << endl;
+			cout << "Please enter a valid coordinate: ";
 			cin >> newtarget;
 			BoardToArray(newtarget);
 		}

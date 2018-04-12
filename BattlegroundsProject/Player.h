@@ -19,7 +19,8 @@ private:
 public:
 	Map();	// Constructor
 	virtual ~Map(); // Destructor
-	void setTiles();	// Method to set the characters in the Tiles array
+	void MapGen();	// Method to set the characters in the Tiles array
+	void setTiles(string, char);
 	void getTiles();	// Method to output the current state of the Tiles array
 	void setTiles_Size(int);	// Method for optional expansion to variable map size
 	int getTiles_Size();	// Method to return map size;
@@ -32,6 +33,7 @@ public:
 	int getCoord(int);
 	bool CheckEndGame();
 	bool BoardToArray(string);	// Method to convert the game board coordinated to array indices
+	void EndTurn();
 };
 
 class player : public Map {
@@ -57,7 +59,7 @@ public:
 	bool TerrainVerify(string, string);
 	int getHealth(); //function returns the hp value of the unit, if it is 0 the unit is dead.
 	int getUnits(); // returns something about the unit number in the vector.
-	void PlayerTurn();
+	string PlayerTurn();
 	void PlayerAttacked(string);
 	bool PlayerMove(string, string);
 };

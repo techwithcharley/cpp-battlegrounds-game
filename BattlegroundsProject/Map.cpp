@@ -11,7 +11,7 @@ Map::Map()
 		cin >> map_size;
 	}
 	setTiles_Size(map_size);
-	setTiles();
+	MapGen();
 }
 
 Map::~Map()
@@ -19,7 +19,7 @@ Map::~Map()
 	// Still to be implemented
 }
 
-void Map::setTiles()
+void Map::MapGen()
 {
 	for (int y = 0; y < Tiles_Size; y++) {	// Iterate through each of the y coordinates
 		for (int x = 0; x < Tiles_Size; x++) {	// Iterate through the x coordinates
@@ -33,6 +33,12 @@ void Map::setTiles()
 			}
 		}
 	}
+}
+
+void Map::setTiles(string coordinate, char type)
+{
+	BoardToArray(coordinate);
+	Tiles[coord[0]][coord[1]] = type;
 }
 
 void Map::getTiles()
@@ -220,4 +226,14 @@ bool Map::BoardToArray(string position)    // Input in the form of a board coord
 			cout << "Invalid Co-ordinate entered!" << endl;
 			return false;
 		}
+}
+
+void Map::EndTurn()
+{
+	char stopchar;
+
+	cout << "Enter a character to end turn: ";
+	cin >> stopchar;
+	system("CLS");
+	cout << flush;
 }
