@@ -1,5 +1,3 @@
-﻿  Main.cpp
-  Player.cpp
-c:\users\game room\documents\github\repo\battlegroundsproject\player.cpp(140): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
+﻿  Map.cpp
+c:\users\game room\documents\github\repo\battlegroundsproject\map.cpp(132): warning C4715: 'Map::getTerrain': not all control paths return a value
   BattlegroundsProject.vcxproj -> C:\Users\Game Room\Documents\GitHub\Repo\x64\Debug\BattlegroundsProject.exe

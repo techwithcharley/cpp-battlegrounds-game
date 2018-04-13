@@ -214,7 +214,13 @@ bool Map::BoardToArray(string position)    // Input in the form of a board coord
 
 	const char* pos_arr = position.c_str();    // Convert input string to a character array (c-string)
 	int x = int(pos_arr[0]) - 65; // Convert first value in array to decimal array coordinate
-	int y = (stoi(position.substr(1, position.length() - 1))) - 1;// Convert remainder of string to other array coordinate
+	int y;
+	try {
+		y = (stoi(position.substr(1, position.length() - 1))) - 1;// Convert remainder of string to other array coordinate
+	}
+	catch(...){
+		return false;
+	}
 	if (x < Tiles_Size && x > -1 && y < Tiles_Size && y > -1) {    // Verify that input is within the board limits
 
 			cout << "valid Co-ordinate entered!" << endl;

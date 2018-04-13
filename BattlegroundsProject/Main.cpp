@@ -8,7 +8,7 @@ int main() {
 	player player1; // this is the class for player 1
 	player player2; //this is the class for player 2
 	
-	//Game setup for player 1 
+	//Game setup for player 1.
 	cout << "Player 1: Unit Placement" << endl;
 	player1.getTiles();
 	player1.setUnits(3);
@@ -23,8 +23,6 @@ int main() {
 	player2.EndTurn();
 
 	// Turn iteration.
-	//i'll move it into functions later.
-
 	while (player1.CheckEndGame() == false && player2.CheckEndGame() == false) {
 
 		cout << "Player 1: Turn" << endl;
@@ -35,7 +33,7 @@ int main() {
 			player1.PlayerTurn();
 		}
 
-		if (userturn != "move" || "endturn") {
+		if (player1.BoardToArray(userturn) == true) {
 			player2.PlayerAttacked(userturn);
 		}
 		player1.EndTurn();
@@ -44,10 +42,11 @@ int main() {
 		player2.getTiles();
 		userturn = player2.PlayerTurn();
 
-		while (userturn == "error")
+		while (userturn == "error") {
 			player2.PlayerTurn();
+		}
 
-		if (userturn != "move" || "endturn") {
+		if (userturn != "move" || userturn != "endturn") {
 			player1.PlayerAttacked(userturn);
 		}
 		player2.EndTurn();
