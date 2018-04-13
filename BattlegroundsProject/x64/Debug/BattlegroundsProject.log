@@ -1,3 +1,2 @@
-﻿  Map.cpp
-c:\users\game room\documents\github\repo\battlegroundsproject\map.cpp(132): warning C4715: 'Map::getTerrain': not all control paths return a value
+﻿  Main.cpp
   BattlegroundsProject.vcxproj -> C:\Users\Game Room\Documents\GitHub\Repo\x64\Debug\BattlegroundsProject.exe

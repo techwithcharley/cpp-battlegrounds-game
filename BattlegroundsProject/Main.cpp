@@ -46,7 +46,7 @@ int main() {
 			player2.PlayerTurn();
 		}
 
-		if (userturn != "move" || userturn != "endturn") {
+		if (player2.BoardToArray(userturn) == true) {
 			player1.PlayerAttacked(userturn);
 		}
 		player2.EndTurn();
