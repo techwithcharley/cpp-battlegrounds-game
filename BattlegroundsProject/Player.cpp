@@ -1,15 +1,8 @@
 #include "Player.h"
 
-player::player() {
+player::player() 
+{
 
-	char stopchar;
-	cout << "enter stopchar, map generated for player"  << endl;
-	cin >> stopchar;
-
-	Cover.resize(getTiles_Size());
-	for (int i = 0; i < getTiles_Size(); i++) {
-		Cover[i].resize(getTiles_Size());
-	}
 }
 player::~player()
 {
@@ -40,6 +33,11 @@ void player::setHealth(int hp)
 
 void player::setUnits(int unit)
 {
+	Cover.resize(getTiles_Size());
+	for (int i = 0; i < getTiles_Size(); i++) {
+		Cover[i].resize(getTiles_Size());
+	}
+
 	Units.resize(unit);
 	char unit_type = NULL;
 	string coordinate;

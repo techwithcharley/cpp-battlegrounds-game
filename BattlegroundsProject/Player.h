@@ -20,6 +20,7 @@ private:
 public:
 	Map();	// Constructor
 	virtual ~Map(); // Destructor
+	void setMapSize();
 	void MapGen();	// Method to set the characters in the Tiles array
 	void setTiles(string, char);
 	void getTiles();	// Method to output the current state of the Tiles array
@@ -28,6 +29,7 @@ public:
 	void UpdateTiles(string, string);	// Method to update Tiles array between turns
 	void setTerrain(string, bool);	// Method to set members of the Terrain array
 	bool getTerrain(string);	// Method to access the data of a specific tile's terrain type
+	bool setComUnit(string, char);
 	void setHasUnit(string, char);	// Method to set members of the HasUnit array
 	char getHasUnit(string);	// Method to test if a specific tile contains a unit
 	void setCoord(int, int);
@@ -76,6 +78,9 @@ public:
 	void setComCover(string, bool);
 	bool getComCover(string);
 	void setComUnits(int);
+	int getComUnits();
+	bool TerrainVerify(string, string);
+	bool DistanceVerify(string, string);
 	void ComAttacked(string);
 	bool ComMove(string, string);
 	string ComTurn();

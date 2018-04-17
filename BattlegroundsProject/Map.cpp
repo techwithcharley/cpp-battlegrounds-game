@@ -2,6 +2,16 @@
 
 Map::Map()
 {
+
+}
+
+Map::~Map()
+{
+	// Still to be implemented
+}
+
+void Map::setMapSize()
+{
 	int map_size;
 	cout << "Enter desired map size (max 9): ";
 	cin >> map_size;
@@ -12,11 +22,6 @@ Map::Map()
 	}
 	setTiles_Size(map_size);
 	MapGen();
-}
-
-Map::~Map()
-{
-	// Still to be implemented
 }
 
 void Map::MapGen()
@@ -102,7 +107,6 @@ void Map::UpdateTiles(string old_position, string new_position)    // Input in t
 void Map::setTerrain(string position, bool type)    // Input in the form of a board coordinate e.g "A3" and a boolean value
 {
 	BoardToArray(position);    // Convert board coordinate to array index
-
 	Terrain[coord[0]][coord[1]] = type;    // Set value at array index to variable type
 
 	if (type == true) {
@@ -120,16 +124,60 @@ bool Map::getTerrain(string position)    // Input in the form of a board coordin
 		cout << "Terrain is land!" << endl;
 		return Terrain[coord[0]][coord[1]];
 	}
-	else if (Terrain[coord[0]][coord[1]] == false)
-	{
+	else if (Terrain[coord[0]][coord[1]] == false){
 			cout << "Terrain is water!" << endl;
 			return Terrain[coord[0]][coord[1]];    // Return value at current array index
 	}
-	else
-	{
+	else{
 		cout << "error getTerrain" << endl;
 	}
 }
+
+bool Map::setComUnit(string position, char type)
+{
+	switch (type){
+	case 'I':
+		if (getTerrain(position) != true){
+			return false;
+
+			if (getHasUnit(position) != NULL){
+				return false;
+			}
+		}
+		HasUnit[coord[0]][coord[1]] = type;
+		return true;
+		break;
+
+	case 'S':
+		while (getTerrain(position) != false){
+			return false;
+
+			while (getHasUnit(position) != NULL){
+				return false;
+			}
+		}
+		HasUnit[coord[0]][coord[1]] = type;
+		return true;
+		break;
+
+	case 'P':
+		while (getHasUnit(position) != NULL){
+			return false;
+		}
+		HasUnit[coord[0]][coord[1]] = type;
+		return true;
+		break;
+
+	case NULL:
+		HasUnit[coord[0]][coord[1]] = type;
+		return true;
+		break;
+
+	default:
+		return false;
+	}
+}
+
 void Map::setHasUnit(string position, char type)    // Input in the form of a board coordinate e.g "A3" and a boolean value
 {
 	switch (type){
