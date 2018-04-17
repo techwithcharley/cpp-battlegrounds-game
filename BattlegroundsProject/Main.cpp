@@ -1,10 +1,9 @@
 #include "Player.h"
 
 int main() {
-
+	/*
 	string userturn; // this is the tile the user selects to fire at
 	string old_coordinate, new_coordinate; // these are the coordinates used for the moving of units by players.
-	char stopchar; // used at the end to halt the console screen before exiting.
 	player player1; // this is the class for player 1
 	player player2; //this is the class for player 2
 	
@@ -58,9 +57,15 @@ int main() {
 	else {
 		cout << "Player 2 has been defeated..." << endl;
 	}
+	*/
+
+	computer com;
+	cout << "random: " << com.RandomCoord() << endl;
+	cout << "random: " << com.RandomCoord() << endl;
+	cout << "random: " << com.RandomCoord() << endl;
 
 	cout << "End of the game, Thanks for playing!" << endl;
 	cout << "Enter a character to exit the console." << endl;
+	char stopchar; // used at the end to halt the console screen before exiting.
 	cin >> stopchar;
-
 }

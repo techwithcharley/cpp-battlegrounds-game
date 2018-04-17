@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 
@@ -62,5 +63,22 @@ public:
 	string PlayerTurn();
 	void PlayerAttacked(string);
 	bool PlayerMove(string, string);
+};
+
+class computer : public Map {
+private:
+	vector<vector<bool>> ComCover;
+	vector<string> ComUnits;
+
+public:
+	computer();
+	virtual ~computer();
+	void setComCover(string, bool);
+	bool getComCover(string);
+	void setComUnits(int);
+	void ComAttacked(string);
+	bool ComMove(string, string);
+	string ComTurn();
+	string RandomCoord();
 };
 #endif
