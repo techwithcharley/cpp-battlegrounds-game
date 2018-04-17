@@ -4,7 +4,7 @@ int main() {
 	
 	string userturn, playermode; // this is the tile the user selects to fire at
 	string old_coordinate, new_coordinate; // these are the coordinates used for the moving of units by players.
-	bool endgame2 = true;
+	bool endgame2 = false;
 	player player1; // this is the class for player 1
 	player player2; //this is the class for player 2
 	computer com;
@@ -18,13 +18,13 @@ int main() {
 
 	if (playermode == "1"){
 		player1.setMapSize();
-		player2.setTiles_Size(player1.getTiles_Size());
-		player2.MapGen();
+		com.setTiles_Size(player1.getTiles_Size());
+		com.MapGen();
 	}
 	else if (playermode == "2"){
 		player1.setMapSize();
-		com.setTiles_Size(player1.getTiles_Size());
-		com.MapGen();
+		player2.setTiles_Size(player1.getTiles_Size());
+		player2.MapGen();
 	}
 
 	//Game setup for player 1.
@@ -61,7 +61,12 @@ int main() {
 		}
 
 		if (player1.BoardToArray(userturn) == true) {
-			player2.PlayerAttacked(userturn);
+			if (playermode == "1") {
+				com.ComAttacked(userturn);
+			}
+			else {
+				player2.PlayerAttacked(userturn);
+			}
 		}
 		player1.EndTurn();
 

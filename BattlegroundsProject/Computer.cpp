@@ -2,10 +2,7 @@
 
 computer::computer()
 {
-	ComCover.resize(getTiles_Size());
-	for (int i = 0; i < getTiles_Size(); i++) {
-		ComCover[i].resize(getTiles_Size());
-	}
+
 }
 
 computer::~computer()
@@ -27,6 +24,11 @@ bool computer::getComCover(string position)
 
 void computer::setComUnits(int num_units)
 {
+	ComCover.resize(getTiles_Size());
+	for (int i = 0; i < getTiles_Size(); i++) {
+		ComCover[i].resize(getTiles_Size());
+	}
+
 	ComUnits.resize(num_units);
 	string unit_types = "ISPISPISPISPISP";
 	char unit_type;
@@ -140,8 +142,9 @@ string computer::RandomCoord()
 {
 	string alphabet = "ABCDEFGHIJ", result;
 
-	int coord_y = rand() % getTiles_Size();
-	int coord_x = rand() % getTiles_Size();
+	int tiles_size = getTiles_Size();
+	int coord_y = rand()%tiles_size;
+	int coord_x = rand()%tiles_size;
 
 	result = alphabet[coord_x] + to_string(coord_y);
 	return result;
