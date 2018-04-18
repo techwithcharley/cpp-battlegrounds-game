@@ -4,6 +4,7 @@ player::player()
 {
 
 }
+
 player::~player()
 {
 	// Still to be implemented
