@@ -37,7 +37,7 @@ void player::setUnits(int unit)
 		Cover[i].resize(getTiles_Size());
 	}
 
-	Units.resize(unit);
+	Units = unit;
 	char unit_type = NULL;
 	string coordinate;
 
@@ -134,16 +134,24 @@ int player::getHealth()
 
 int player::getUnits()
 {
-	return Units.size();
+	return Units;
 }
 
 string player::PlayerTurn()
 {
-	string playerturn, old_coordinate, new_coordinate, target, code;
+	string playerturn, old_coordinate, new_coordinate, target;
 
 	cout << "What would you like to do this turn?" << endl;
 	cout << "[1] Move a unit" << endl << "[2] fire at the other player" << endl << "[3] end turn" << endl;
-	cin >> playerturn; // needs validation,
+	cin >> playerturn;
+
+	try{
+		stoi(playerturn);
+	}
+	catch (...){
+		cout << "Error, invalid action..." << endl;
+		return "error";
+	}
 
 	switch (stoi(playerturn)) {
 	case 1:
@@ -158,8 +166,7 @@ string player::PlayerTurn()
 			cin >> new_coordinate;
 		}
 		setHasMoved(true); // sets that the player will have moved
-		code = "move";
-		return code;
+		return "move";
 		break;
 
 	case 2:
@@ -170,14 +177,12 @@ string player::PlayerTurn()
 
 	case 3:
 		cout << "Turn ended..." << endl;
-		code = "endturn";
-		return code;
+		return "endturn";
 		break;
 
 	default:
 		cout << "Invalid command entered..." << endl;
-		code = "error";
-		return code;
+		return "error";
 		break;
 	}
 }

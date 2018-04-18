@@ -29,7 +29,7 @@ void computer::setComUnits(int num_units)
 		ComCover[i].resize(getTiles_Size());
 	}
 
-	ComUnits.resize(num_units);
+	ComUnits = num_units;
 	string unit_types = "ISPISPISPISPISP";
 	char unit_type;
 	string coordinate;
@@ -46,7 +46,7 @@ void computer::setComUnits(int num_units)
 
 int computer::getComUnits()
 {
-	return ComUnits.size();
+	return ComUnits;
 }
 
 void computer::ComAttacked(string target)

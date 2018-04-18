@@ -42,8 +42,7 @@ class player : public Map {
 private:
 	vector<vector<bool>> Cover;	// Vector of vectors of boolean values indicating the cover value of each tile
 	bool HasMoved;	// Boolean value indicating whether the user has moved this turn
-	int MoveDistance, i, Health;	// Integer values representing current state of user
-	vector <string> Units;	// *********** Does this need to be a vector? *********** //
+	int MoveDistance, i, Health, Units;	// Integer values representing current state of user
 
 public:
 	player();	// Constructor for player class
@@ -67,7 +66,7 @@ public:
 class computer : public Map {
 private:
 	vector<vector<bool>> ComCover;	// Vector of vectors of booloean values indicating the cover value of each tile
-	vector<string> ComUnits;	// *********** Does this need to be a vector? *********** //
+	int ComUnits;	// Integer value representing initial number of units
 
 public:
 	computer();	// Constructor for computer class

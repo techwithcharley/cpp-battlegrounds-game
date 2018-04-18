@@ -12,7 +12,7 @@ int main() {
 
 // *********** Game setup *********** //
 
-	do{
+	do{	// Run at least once
 		cout << "Would you like:\n[1] Single-player\n[2] Multi-player" << endl;	// Ask user to select number of players
 		cin >> playermode;	// Store user input within playermode variable
 	} while ((playermode.find("1") == false || playermode.find("2") == false) && playermode.size() > 1 );	// Conditions to verify the input
@@ -57,15 +57,10 @@ int main() {
 
 		cout << "Player 1: Turn" << endl;
 		player1.getTiles();	// Display player 1's map
-
-///////////////////////////////////////////////////////////////////////////////////
-// ** Needs fixed, possibly try and catch to deal with invalid keyboard input ** //
-		userturn = player1.PlayerTurn();
-
-		while (userturn == "error") {
-			player1.PlayerTurn();
-		}
-///////////////////////////////////////////////////////////////////////////////////
+		
+		do{	// Run at least once
+			userturn = player1.PlayerTurn();	// Allow the user to select an action
+		} while (userturn == "error");	// Loop if an invalid action is selected
 
 		if (player1.BoardToArray(userturn) == true) {	// Check if userturn is a valid board coordinate
 			if (playermode == "1") {	// Check if the user has selected single-player
@@ -89,15 +84,10 @@ int main() {
 		else if (playermode == "2"){	// Check if the user has selected multi-player
 			cout << "Player 2: Turn" << endl;
 			player2.getTiles();	// Display player 2's map
-
-///////////////////////////////////////////////////////////////////////////////////
-// ** Needs fixed, possibly try and catch to deal with invalid keyboard input ** //
-			userturn = player2.PlayerTurn();
-
-			while (userturn == "error") {
-				player2.PlayerTurn();
-			}
-///////////////////////////////////////////////////////////////////////////////////
+			
+			do{	// Run at least once
+				userturn = player1.PlayerTurn();	// Allow the user to select an action
+			} while (userturn == "error");	// Loop if an invalid action is selected
 
 			if (player2.BoardToArray(userturn) == true) {	// Check if userturn is a valid board coordinate
 				player1.PlayerAttacked(userturn);	// Check if the attack has hit player 1
@@ -109,10 +99,10 @@ int main() {
 	
 // *********** Endgame process *********** //
 
-	if (player1.CheckEndGame() == true) {	// Check if player 1 or 2 was eliminated
+	if (player1.CheckEndGame() == true) {	// Check if player 1 was eliminated
 		cout << "Player 1 has been defeated..." << endl;
 	}
-	else if(endgame2 == true) {
+	else if(endgame2 == true) {	// Check if player 2 was eliminated
 		cout << "Player 2 has been defeated..." << endl;
 	}
 	else{

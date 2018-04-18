@@ -128,9 +128,6 @@ bool Map::getTerrain(string position)    // Input in the form of a board coordin
 			cout << "Terrain is water!" << endl;
 			return Terrain[coord[0]][coord[1]];    // Return value at current array index
 	}
-	else{
-		cout << "error getTerrain" << endl;
-	}
 }
 
 bool Map::setComUnit(string position, char type)
