@@ -136,6 +136,11 @@ string computer::ComTurn()
 		cout << "ending turn..." << endl;
 		return "endturn";
 		break;
+
+	default:
+		cout << "Error, Invalid action..." << endl;
+		return "error";
+		break;
 	}
 }
 
