@@ -119,13 +119,50 @@ void Map::setTerrain(string position, bool type)    // Input in the form of a bo
 bool Map::getTerrain(string position)    // Input in the form of a board coordinate e.g "A3"
 {
 	BoardToArray(position);    // Convert board coordinate to array index, should validate the first input? but doesn't?
+	return Terrain[coord[0]][coord[1]];
+}
 
-	if (Terrain[coord[0]][coord[1]] == true) {    // Check if terrain at current array index is land
-		return Terrain[coord[0]][coord[1]];
+bool Map::TerrainVerify(string old_pos, string new_pos)
+{
+	switch (getHasUnit(old_pos)) {
+	case 'I':
+		if (getTerrain(new_pos) != true) {
+			return false;
+		}
+		break;
+
+	case 'S':
+		if (getTerrain(new_pos) != false) {
+			return false;
+		}
+		break;
+
+	case NULL:
+		return false;
+		break;
 	}
-	else if (Terrain[coord[0]][coord[1]] == false){
-			return Terrain[coord[0]][coord[1]];    // Return value at current array index
+	return true;
+}
+
+bool Map::DistanceVerify(string old_pos, string new_pos) // Verifies that the user is only moving one tile
+{
+	BoardToArray(old_pos);
+	int old_y = getCoord(0);
+	int old_x = getCoord(1);
+	BoardToArray(new_pos);
+	int diff_sum = (getCoord(0) + getCoord(1)) - (old_x + old_y);
+
+	if ((diff_sum > MoveDistance) || (diff_sum < -1 * MoveDistance)) {
+		return false;
 	}
+	else{
+		return true;
+	}
+}
+
+void Map::setMoveDistance(int dist) // how much can it move staying at 1 just now.
+{
+	MoveDistance = dist;
 }
 
 bool Map::setHasUnit(string position, char type)    // Input in the form of a board coordinate e.g "A3" and a boolean value
@@ -200,7 +237,6 @@ bool Map::CheckEndGame()
 			}
 		}
 	}
-	cout << "Count: " << count << endl;
 	if (count == 0) {
 		cout << "End Game reached..." << endl;
 		return true;

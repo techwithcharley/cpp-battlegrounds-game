@@ -21,32 +21,35 @@ int main() {
 		player1.setMapSize();	// Initialise the map for player 1
 		player1.setMoveDistance(2);	// Set the maximum movement distance for player 1
 		com.setTiles_Size(player1.getTiles_Size());	// Set the map size for the computer to that of player 1
+		com.robot.setTiles_Size(player1.getTiles_Size());	// Set the map size for the computer to that of player 1
+		com.robot.setMoveDistance(2);	// Set the maximum movement distance for the computer
 		com.MapGen();	// Generate the map for the computer
 	}
 	else if (playermode == "2"){	// Check if the user has selected multi-player
 		player1.setMapSize();	// Initialise the map for player 1
 		player2.setTiles_Size(player1.getTiles_Size());	// Set the map size for player 2 to that of player 1
 		player2.MapGen();	// Generate the map for player 2
+		player2.setMoveDistance(2);	// Set the maximum movement distance for player 2
 	}
 
 // *********** Unit placement *********** //
 
 	cout << "Player 1: Unit Placement" << endl;
 	player1.getTiles();	// Output the blank map to the user
-	player1.setUnits(3);	// Call the method to place the user's units on the map
+	player1.placeUnits(3);	// Call the method to place the user's units on the map
 	player1.getTiles();	// Output the populated map to the user
 	player1.EndTurn();	// Clear the console for the next player
 	
 	if (playermode == "1"){	// Check if the user has selected single-player
 		cout << "Computer: Unit Placement" << endl;
 		com.getTiles();	// Output the blank computer map **Testing only**
-		com.setComUnits(3);	// Place the computer's units on the map
+		com.placeComUnits(3);	// Place the computer's units on the map
 		com.getTiles();	// Output the populated computer map **Testing only**
 	}
 	else if (playermode == "2"){	// Check if the user has selected multi-player
 		cout << "Player 2: Unit Placement" << endl;
 		player2.getTiles();	// Output the blank map to the user
-		player2.setUnits(3);	// Call the method to place the user's units on the map
+		player2.placeUnits(3);	// Call the method to place the user's units on the map
 		player2.getTiles();	// Output the populated map to the user
 		player2.EndTurn();	// Clear the console for the next player
 	}

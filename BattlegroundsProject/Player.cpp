@@ -20,17 +20,12 @@ void player::setHasMoved(bool moved) // has it moved y/n
 	HasMoved = moved; // this function can be called with a true false input put in, within another function and or main?
 }
 
-void player::setMoveDistance(int dist) // how much can it move staying at 1 just now.
-{
-	MoveDistance = dist;
-}
-
 void player::setHealth(int hp)
 {
 	Health = hp;
 }
 
-void player::setUnits(int unit)
+void player::placeUnits(int unit)
 {
 	Cover.resize(getTiles_Size());
 	for (int i = 0; i < getTiles_Size(); i++) {
@@ -41,7 +36,7 @@ void player::setUnits(int unit)
 	char unit_type = NULL;
 	string coordinate;
 
-	for (int z = 0; z < getUnits(); z++) 
+	for (int z = 0; z < getUnits(); z++)
 	{
 		switch (z) {
 
@@ -65,10 +60,15 @@ void player::setUnits(int unit)
 		cout << "Enter the coordinate you want the unit to be placed at, ie : A1" << endl;
 		cin >> coordinate;
 		while (setHasUnit(coordinate, unit_type) == false){
-			cout << "Placement failure, please enter a different coordinate: ";
+			cout << "Placement invalid, please enter a different coordinate: ";
 			cin >> coordinate;
 		}
 	}
+}
+
+void player::setUnits(int num_unit)
+{
+	Units = num_unit;
 }
 
 bool player::getCover(string position) // returns a boolean 0 = no
@@ -86,46 +86,6 @@ bool player::getHasMoved() // returns if it has moved 1b= if yes
 		cout << "Unit has not moved! \n";
 	}
 	return HasMoved;
-}
-
-bool player::DistanceVerify(string old_pos, string new_pos) // Verifies that the user is only moving one tile
-{
-	BoardToArray(old_pos);
-	int old_y = getCoord(0);
-	int old_x = getCoord(1);
-	BoardToArray(new_pos);
-	int diff_sum = (getCoord(0) + getCoord(1)) - (old_x + old_y);
-	cout << "diff_sum: " << diff_sum << endl;
-
-	if ((diff_sum > MoveDistance) || (diff_sum < MoveDistance * -1)) {
-		cout << "Unit cannot move that far, please enter a new coordinate: ";
-		return false;
-	}
-	return true;
-}
-
-bool player::TerrainVerify(string old_pos, string new_pos)
-{
-	switch (getHasUnit(old_pos)) {
-	case 'I':
-		if (getTerrain(new_pos) != true) {
-			cout << "Error! Invalid terrain...";
-			return false;
-		}
-		break;
-
-	case 'S':
-		if (getTerrain(new_pos) != false) {
-			cout << "Error! Invalid terrain...";
-			return false;
-		}
-		break;
-
-	case NULL:
-		cout << "No unit at selected coordinate..." << endl;
-		return false;
-	}
-	return true;
 }
 
 int player::getHealth()
@@ -189,25 +149,14 @@ string player::PlayerTurn()
 }
 
 void player::PlayerAttacked(string target) // Method called when opponent attacks a tile
-{ 
-	string newtarget; 
-
-	if (BoardToArray(target) == true) {
-		if (getHasUnit(target) != NULL) {
-			cout << "Hit!" << endl;
-			setHasUnit(target, NULL);
-			setTiles(target, 'X');
-		}
-		else {
-			cout << "Attack missed..." << endl;
-		}
+{  
+	if (getHasUnit(target) != NULL) {
+		cout << "Hit!" << endl;
+		setHasUnit(target, NULL);
+		setTiles(target, 'X');
 	}
 	else {
-		while (BoardToArray(newtarget) != true) {
-			cout << "Please enter a valid coordinate: ";
-			cin >> newtarget;
-			BoardToArray(newtarget);
-		}
+		cout << "Attack missed..." << endl;
 	}
 }
 

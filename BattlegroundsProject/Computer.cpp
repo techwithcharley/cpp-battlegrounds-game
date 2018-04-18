@@ -10,31 +10,14 @@ computer::~computer()
 
 }
 
-void computer::setComCover(string position, bool value)
+void computer::placeComUnits(int num_units)
 {
-	BoardToArray(position);
-	ComCover[getCoord(0)][getCoord(1)] = value;
-}
-
-bool computer::getComCover(string position)
-{
-	BoardToArray(position);
-	return ComCover[getCoord(0)][getCoord(1)];
-}
-
-void computer::setComUnits(int num_units)
-{
-	ComCover.resize(getTiles_Size());
-	for (int i = 0; i < getTiles_Size(); i++) {
-		ComCover[i].resize(getTiles_Size());
-	}
-
-	ComUnits = num_units;
+	robot.setUnits(num_units);
 	string unit_types = "ISPISPISPISPISP";
 	char unit_type;
 	string coordinate;
 
-	for (int i = 0; i < getComUnits(); i++){
+	for (int i = 0; i < robot.getUnits(); i++){
 		unit_type = unit_types[i];
 		coordinate = RandomCoord();
 		cout << "Type: " << unit_type << endl;
@@ -44,52 +27,16 @@ void computer::setComUnits(int num_units)
 	}
 }
 
-int computer::getComUnits()
-{
-	return ComUnits;
-}
-
 void computer::ComAttacked(string target)
 {
 	if (getHasUnit(target) != NULL) {
+		cout << "Hit!" << endl;
 		setHasUnit(target, NULL);
 		setTiles(target, 'X');
 	}
-}
-
-bool computer::TerrainVerify(string old_pos, string new_pos)
-{
-	switch (getHasUnit(old_pos)) {
-	case 'I':
-		if (getTerrain(new_pos) != true) {
-			return false;
-		}
-		break;
-
-	case 'S':
-		if (getTerrain(new_pos) != false) {
-			return false;
-		}
-		break;
-
-	case NULL:
-		return false;
+	else{
+		cout << "Attack missed..." << endl;
 	}
-	return true;
-}
-
-bool computer::DistanceVerify(string old_pos, string new_pos)
-{
-	BoardToArray(old_pos);
-	int old_y = getCoord(0);
-	int old_x = getCoord(1);
-	BoardToArray(new_pos);
-	int diff_sum = (getCoord(0) + getCoord(1)) - (old_x + old_y);
-
-	if ((diff_sum > 1) || (diff_sum < -1)) {
-		return false;
-	}
-	return true;
 }
 
 bool computer::ComMove(string old_pos, string new_pos)
