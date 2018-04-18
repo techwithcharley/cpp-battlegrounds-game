@@ -20,10 +20,9 @@ void player::setHasMoved(bool moved) // has it moved y/n
 	HasMoved = moved; // this function can be called with a true false input put in, within another function and or main?
 }
 
-void player::setMoveDistance(string old_pos, string new_pos) // how much can it move staying at 1 just now.
+void player::setMoveDistance(int dist) // how much can it move staying at 1 just now.
 {
-	MoveDistance = 1;
-
+	MoveDistance = dist;
 }
 
 void player::setHealth(int hp)
@@ -97,7 +96,7 @@ bool player::DistanceVerify(string old_pos, string new_pos) // Verifies that the
 	int diff_sum = (getCoord(0) + getCoord(1)) - (old_x + old_y);
 	cout << "diff_sum: " << diff_sum << endl;
 
-	if ((diff_sum > 1) || (diff_sum < -1)) {
+	if ((diff_sum > MoveDistance) || (diff_sum < MoveDistance * -1)) {
 		cout << "Unit cannot move that far, please enter a new coordinate: ";
 		return false;
 	}

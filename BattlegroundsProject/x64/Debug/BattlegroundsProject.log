@@ -1,3 +1,17 @@
-﻿  Main.cpp
-c:\users\game room\documents\github\repo\battlegroundsproject\main.cpp(12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  BattlegroundsProject.vcxproj -> C:\Users\Game Room\Documents\GitHub\Repo\x64\Debug\BattlegroundsProject.exe
+﻿Build started 18/04/2018 10:27:05.
+     1>Project "H:\Repo\BattlegroundsProject\BattlegroundsProject.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt Main.cpp
+         Main.cpp
+     1>Main.cpp(11): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"H:\Repo\x64\Debug\BattlegroundsProject.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"H:\Repo\x64\Debug\BattlegroundsProject.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\Repo\x64\Debug\BattlegroundsProject.lib" /MACHINE:X64 x64\Debug\Computer.obj
+         x64\Debug\Main.obj
+         x64\Debug\Map.obj
+         x64\Debug\Player.obj
+         BattlegroundsProject.vcxproj -> H:\Repo\x64\Debug\BattlegroundsProject.exe
+     1>Done Building Project "H:\Repo\BattlegroundsProject\BattlegroundsProject.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.15
