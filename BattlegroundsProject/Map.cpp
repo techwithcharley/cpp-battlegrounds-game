@@ -121,16 +121,14 @@ bool Map::getTerrain(string position)    // Input in the form of a board coordin
 	BoardToArray(position);    // Convert board coordinate to array index, should validate the first input? but doesn't?
 
 	if (Terrain[coord[0]][coord[1]] == true) {    // Check if terrain at current array index is land
-		cout << "Terrain is land!" << endl;
 		return Terrain[coord[0]][coord[1]];
 	}
 	else if (Terrain[coord[0]][coord[1]] == false){
-			cout << "Terrain is water!" << endl;
 			return Terrain[coord[0]][coord[1]];    // Return value at current array index
 	}
 }
 
-bool Map::setComUnit(string position, char type)
+bool Map::setHasUnit(string position, char type)    // Input in the form of a board coordinate e.g "A3" and a boolean value
 {
 	switch (type){
 	case 'I':
@@ -172,48 +170,6 @@ bool Map::setComUnit(string position, char type)
 
 	default:
 		return false;
-	}
-}
-
-void Map::setHasUnit(string position, char type)    // Input in the form of a board coordinate e.g "A3" and a boolean value
-{
-	switch (type){
-	case 'I':
-		while (getTerrain(position) != true){
-			cout << "Error! Invalid terrain, please enter a new coordinate: ";
-			cin >> position;
-
-			while (getHasUnit(position) != NULL){
-				cout << "Error! Tile already taken, please enter a new coordinate: ";
-				cin >> position;
-			}
-		}
-		HasUnit[coord[0]][coord[1]] = type;
-		break;
-
-	case 'S':
-		while (getTerrain(position) != false){
-			cout << "Error! Invalid terrain, please enter a new coordinate: ";
-			cin >> position;
-
-			while (getHasUnit(position) != NULL){
-				cout << "Error! Tile already taken, please enter a new coordinate: ";
-				cin >> position;
-			}
-		}
-		HasUnit[coord[0]][coord[1]] = type;
-		break;
-
-	case 'P':
-		while (getHasUnit(position) != NULL){
-			cout << "Error! Tile already taken, please enter a new coordinate: ";
-			cin >> position;
-		}
-		HasUnit[coord[0]][coord[1]] = type;
-		break;
-
-	case NULL:
-		HasUnit[coord[0]][coord[1]] = type;
 	}
 }
 
@@ -267,14 +223,11 @@ bool Map::BoardToArray(string position)    // Input in the form of a board coord
 		return false;
 	}
 	if (x < Tiles_Size && x > -1 && y < Tiles_Size && y > -1) {    // Verify that input is within the board limits
-
-			cout << "valid Co-ordinate entered!" << endl;
 			coord[0] = y;    // Store values in the coord array
 			coord[1] = x;
 			return true;
 	}
 	else {
-			cout << "Invalid Co-ordinate entered!" << endl;
 			return false;
 		}
 }

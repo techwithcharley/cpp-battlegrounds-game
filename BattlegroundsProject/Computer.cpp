@@ -38,7 +38,7 @@ void computer::setComUnits(int num_units)
 		unit_type = unit_types[i];
 		coordinate = RandomCoord();
 		cout << "Type: " << unit_type << endl;
-		while (setComUnit(coordinate, unit_type) == false){
+		while (setHasUnit(coordinate, unit_type) == false){
 			coordinate = RandomCoord();
 		}
 	}

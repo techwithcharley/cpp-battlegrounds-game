@@ -28,8 +28,7 @@ public:
 	void UpdateTiles(string, string);	// Method to update the Tiles array after unit movement
 	void setTerrain(string, bool);	// Method to set members of the Terrain array
 	bool getTerrain(string);	// Method to access the data of a specific tile's terrain type
-	bool setComUnit(string, char);	// Method to place computer units within the HasUnit array
-	void setHasUnit(string, char);	// Method to set members of the HasUnit array
+	bool setHasUnit(string, char);	// Method to set members of the HasUnit array
 	char getHasUnit(string);	// Method to test if a specific tile contains a unit
 	void setCoord(int, int);	// Method to manually set the coord data member
 	int getCoord(int);	// Method to access a value within the coord array

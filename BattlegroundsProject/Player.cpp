@@ -64,7 +64,10 @@ void player::setUnits(int unit)
 		cout << "Type: " << unit_type << endl;
 		cout << "Enter the coordinate you want the unit to be placed at, ie : A1" << endl;
 		cin >> coordinate;
-		setHasUnit(coordinate, unit_type); //sets the position of this unit
+		while (setHasUnit(coordinate, unit_type) == false){
+			cout << "Placement failure, please enter a different coordinate: ";
+			cin >> coordinate;
+		}
 	}
 }
 
@@ -76,12 +79,10 @@ bool player::getCover(string position) // returns a boolean 0 = no
 
 bool player::getHasMoved() // returns if it has moved 1b= if yes
 {
-	if (HasMoved == true) // if loop to inform the user that that unit has moved or not.
-	{
+	if (HasMoved == true){ // if loop to inform the user that that unit has moved or not.
 		cout << "player has moved! \n";
 	}
-	else
-	{
+	else{
 		cout << "Unit has not moved! \n";
 	}
 	return HasMoved;
@@ -191,8 +192,7 @@ void player::PlayerAttacked(string target) // Method called when opponent attack
 { 
 	string newtarget; 
 
-	if (BoardToArray(target) == true)
-	{
+	if (BoardToArray(target) == true) {
 		if (getHasUnit(target) != NULL) {
 			cout << "Hit!" << endl;
 			setHasUnit(target, NULL);
@@ -202,10 +202,8 @@ void player::PlayerAttacked(string target) // Method called when opponent attack
 			cout << "Attack missed..." << endl;
 		}
 	}
-	else
-	{
-		while (BoardToArray(newtarget) != true)
-		{
+	else {
+		while (BoardToArray(newtarget) != true) {
 			cout << "Please enter a valid coordinate: ";
 			cin >> newtarget;
 			BoardToArray(newtarget);
