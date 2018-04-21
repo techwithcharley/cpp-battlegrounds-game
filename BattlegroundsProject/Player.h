@@ -51,16 +51,16 @@ public:
 	virtual ~player();	// Destructor for player class
 	void setCover(string, bool);	// Method to set the cover value of a specific tile
 	void setHasMoved(bool);	// Method to set that the user has moved this turn
-	void setHealth(int);	// sets the ho of the unit, ie if it has been hit or not. Always going to be 1 in the current dev stage
+	void setHealth(int);	// sets the health of the unit, ie if it has been hit or not. Always going to be 1 in the current dev stage
 	void placeUnits(int);	// sets the units in the beginning.
-	void setUnits(int);	
+	void setUnits(int);	// Sets the number of player units
 	bool getCover(string);	// Method to get the cover value of a specific tile
-	bool getHasMoved();	// returns if it has moved 1= yes
+	bool getHasMoved();	// returns if the unit has moved
 	int getHealth();	//function returns the hp value of the unit, if it is 0 the unit is dead.
-	int getUnits();	// returns something about the unit number in the vector.
-	string PlayerTurn();
-	void PlayerAttacked(string);
-	bool PlayerMove(string, string);
+	int getUnits();	// returns the number of player units
+	string PlayerTurn();	//Method for player to carry out an action per turn
+	void PlayerAttacked(string);	// Method to be called when the player is attacked
+	bool PlayerMove(string, string);	// Method to enable player units to move
 };
 
 class computer : public Map {
