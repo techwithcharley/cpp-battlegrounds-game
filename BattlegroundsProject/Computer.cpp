@@ -1,8 +1,8 @@
 #include "Player.h"
 
-computer::computer()
+computer::computer(int diff)
 {
-
+	difficulty = diff;
 }
 
 computer::~computer()
@@ -55,11 +55,26 @@ bool computer::ComMove(string old_pos, string new_pos)
 
 string computer::ComTurn()
 {
-	int action = rand() % 3+1;	// Generate a value between 1 and 3
+	int action;
+
+	switch (difficulty) {
+	case 1:
+		action = rand() % 6;	// Generate a value between 0 and 5
+		break;
+
+	case 2:
+		action = rand() % 4;	// Generate a value between 0 and 3
+		break;
+
+	case 3:
+		action = rand() % 3 + 1;	// Generate a value between 1 and 3
+		break;
+	}
 	cout << "action: " << action << endl;	// Output the generated value to the console **testing only**
 	string old_coordinate, new_coordinate, target;	// Variables to store coordinates
 
 	switch (action) {	// Switch statement based on generated value
+	case 0:
 	case 1:	// Unit movement case
 		old_coordinate = RandomCoord();	// Generated coordinate for unit to move
 		new_coordinate = RandomCoord();	// Generate coordinate to move unit to
@@ -72,12 +87,14 @@ string computer::ComTurn()
 		break;
 
 	case 2:
+	case 3:
 		target = RandomCoord();	// Generate coordinate to fire at
-		cout << "firing..." << endl;
+		cout << "firing at: " << target << endl;
 		return target;	// Return target coordinate
 		break;
 
-	case 3:
+	case 4:
+	case 5:
 		cout << "ending turn..." << endl;
 		return "endturn";	// Return string
 		break;
@@ -94,9 +111,9 @@ string computer::RandomCoord()
 	string alphabet = "ABCDEFGHIJ", result;	// String of possible board x coordinates
 
 	int tiles_size = getTiles_Size();	// Store game board size in a variable
-	int coord_y = rand()%tiles_size;	// Generate a value between 0 and game board size
+	int coord_y = rand()%tiles_size+1;	// Generate a value between 1 and game board size
 	int coord_x = rand()%tiles_size;	// Generate a value between 0 and game board size
 
-	result = alphabet[coord_x] + to_string(coord_y);	// Append selected letter to generated y coordinate
+	result = alphabet[coord_x] + to_string(coord_y);	// Concatenate selected letter with generated y coordinate
 	return result;	// Return the generated board coordinate
 }

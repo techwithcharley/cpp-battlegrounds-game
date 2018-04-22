@@ -1,2 +1,3 @@
-﻿  Map.cpp
+﻿  Main.cpp
+c:\users\game room\documents\github\repo\battlegroundsproject\main.cpp(11): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   BattlegroundsProject.vcxproj -> C:\Users\Game Room\Documents\GitHub\Repo\x64\Debug\BattlegroundsProject.exe

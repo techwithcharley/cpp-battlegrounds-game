@@ -44,7 +44,7 @@ class player : public Map {
 private:
 	vector<vector<bool>> Cover;	// Vector of vectors of boolean values indicating the cover value of each tile
 	bool HasMoved;	// Boolean value indicating whether the user has moved this turn
-	int i, Health, Units;	// Integer values representing current state of user
+	int Health, Units;	// Integer values representing current state of user
 
 public:
 	player();	// Constructor for player class
@@ -64,9 +64,12 @@ public:
 };
 
 class computer : public Map {
+private:
+	int difficulty;
+
 public:
 	player robot;	// Instance of player class to enable code re-use
-	computer();	// Constructor for computer class
+	computer(int);	// Constructor for computer class
 	virtual ~computer();	// Destructor for computer class
 	void placeComUnits(int);	// Method to place the computer units on the map
 	void ComAttacked(string);	// Method to test if an opponent shot hits a unit

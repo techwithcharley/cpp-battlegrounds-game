@@ -26,9 +26,9 @@ void Map::setMapSize()
 
 void Map::MapGen()
 {
-	for (int y = 0; y < Tiles_Size; y++) {	// Iterate through each of the y coordinates
-		for (int x = 0; x < Tiles_Size; x++) {	// Iterate through the x coordinates
-			if (y > Tiles_Size / 2) {	// Hardcoded terrain types
+	for (int x = 0; x < Tiles_Size; x++) {	// Iterate through each of the y coordinates
+		for (int y = 0; y < Tiles_Size; y++) {	// Iterate through the x coordinates
+			if (x > Tiles_Size / 2) {	// Hardcoded terrain types
 				Tiles[x][y] = '~';	// Set current index values to represent water tiles
 				Terrain[x][y] = false;    // Set Terrain value to water
 			}
@@ -52,13 +52,13 @@ void Map::getTiles()
 
 	cout << alphabet.substr(0, (Tiles_Size * 2) + 1) << endl;	// Print letters to console
 
-	for (int y = 0; y < Tiles_Size; y++) {	// Iterate through all y coordinates
-		cout << y + 1 << " ";    // Print current index + 1 to console for game board
-		for (int x = 0; x < Tiles_Size; x++) {	// Iterate through all x coordinates
+	for (int x = 0; x < Tiles_Size; x++) {	// Iterate through all x coordinates
+		cout << x + 1 << " ";    // Print current index + 1 to console for game board
+		for (int y = 0; y < Tiles_Size; y++) {	// Iterate through all y coordinates
 			if (HasUnit[x][y] != NULL) {	// Check if there is a unit in the current tile
 				Tiles[x][y] = HasUnit[x][y];	// Set the value of 'Tiles' to the current 'HasUnit' tile
 			}
-			cout << Tiles[x][y] << " ";    // Print value stored at the current index to console, to be done by GUI
+			cout << Tiles[x][y] << " ";    // Print value stored at the current index to console
 		}
 		cout << endl;
 	}
