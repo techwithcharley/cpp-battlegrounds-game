@@ -1,3 +1,8 @@
-﻿  Main.cpp
+﻿  Computer.cpp
+  Main.cpp
 c:\users\game room\documents\github\repo\battlegroundsproject\main.cpp(11): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Map.cpp
+c:\users\game room\documents\github\repo\battlegroundsproject\map.cpp(154): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Player.cpp
+  Generating Code...
   BattlegroundsProject.vcxproj -> C:\Users\Game Room\Documents\GitHub\Repo\x64\Debug\BattlegroundsProject.exe

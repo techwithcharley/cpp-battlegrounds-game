@@ -151,9 +151,9 @@ bool Map::DistanceVerify(string old_pos, string new_pos) // Verifies that the us
 	int old_y = getCoord(0);	// Store the y coordinate of the old position
 	int old_x = getCoord(1);	// Store the x coordinate of the old position
 	BoardToArray(new_pos);	// Convert new position to vector indices
-	int diff_sum = (getCoord(0) + getCoord(1)) - (old_x + old_y);	// Calculate the difference between the old and new positions
+	int mag_move = sqrt(pow((getCoord(1) - old_x), 2) + pow((getCoord(1) - old_x), 2));	// Calculate the magnitude to move
 
-	if ((diff_sum > MoveDistance) || (diff_sum < -1 * MoveDistance)) {	// Check if the difference is within the movement limit
+	if (mag_move > MoveDistance) {	// Check if the difference is within the movement limit
 		return false;
 	}
 	else{
