@@ -10,151 +10,151 @@ player::~player()
 	// Still to be implemented
 }
 
-void player::setCover(string position, bool value) // does it have cover? value associated? 
+void player::setCover(string position, bool value)
 {
-	BoardToArray(position);
-	Cover[getCoord(0)][getCoord(1)] = value;
+	BoardToArray(position);	// Convert input position to vector indices
+	Cover[getCoord(0)][getCoord(1)] = value;	// Set value at input position to input value
 }
 
-void player::setHasMoved(bool moved) // has it moved y/n
+void player::setHasMoved(bool moved)
 {
-	HasMoved = moved; // this function can be called with a true false input put in, within another function and or main?
+	HasMoved = moved;	// Set data member to input value
 }
 
 void player::setHealth(int hp)
 {
-	Health = hp;
+	Health = hp;	// Set data member to input value
 }
 
 void player::placeUnits(int unit)
 {
-	Cover.resize(getTiles_Size());
-	for (int i = 0; i < getTiles_Size(); i++) {
-		Cover[i].resize(getTiles_Size());
+	Cover.resize(getTiles_Size());	// Resize first dimension of vector ti data member 'Tiles_Size'
+	for (int i = 0; i < getTiles_Size(); i++) {	// Iterate through first dimension entries
+		Cover[i].resize(getTiles_Size());	// Resize the second dimension of the vector
 	}
 
-	Units = unit;
-	char unit_type = NULL;
-	string coordinate;
+	Units = unit;	//Set data member to input value
+	char unit_type = NULL;	// Initialise variable to store type of current unit to place
+	string coordinate;	// Initialise variable to store keyboard input for position of unit
 
-	for (int z = 0; z < getUnits(); z++)
+	for (int z = 0; z < getUnits(); z++)	// Loop to value of data member
 	{
-		switch (z) {
+		switch (z) {	// Switch statement based on number of units
 
 		case 0:
 		case 3:
-			unit_type = 'I';
+			unit_type = 'I';	// Set variable to land unit
 			break;
 
 		case 1:
 		case 4:
-			unit_type = 'S';
+			unit_type = 'S';	// Set variable to sea unit
 			break;
 
 		case 2:
 		case 5:
-			unit_type = 'P';
+			unit_type = 'P';	// Set variable to air unit
 			break;
 		}
 
-		cout << "Type: " << unit_type << endl;
-		cout << "Enter the coordinate you want the unit to be placed at, ie : A1" << endl;
-		cin >> coordinate;
-		while (setHasUnit(coordinate, unit_type) == false){
-			cout << "Placement invalid, please enter a different coordinate: ";
-			cin >> coordinate;
+		cout << "Type: " << unit_type << endl;	// Output type of unit currently being placed
+		cout << "Enter the coordinate you want the unit to be placed at: ";
+		cin >> coordinate;	// Store keyboard input in variable
+		while (setHasUnit(coordinate, unit_type) == false){	// Loop while unit placement is unsuccessful
+			cout << "Placement invalid, please enter a different coordinate: ";	// Prompt user to retry
+			cin >> coordinate;	// Store new coordinate in variable
 		}
 	}
 }
 
 void player::setUnits(int num_unit)
 {
-	Units = num_unit;
+	Units = num_unit;	// Set data member to input value
 }
 
-bool player::getCover(string position) // returns a boolean 0 = no
+bool player::getCover(string position)
 {
-	BoardToArray(position);
-	return Cover[getCoord(0)][getCoord(1)];
+	BoardToArray(position);	// Convert input coordinate to vector indices
+	return Cover[getCoord(0)][getCoord(1)];	// Return value stored at vector indices
 }
 
-bool player::getHasMoved() // returns if it has moved 1b= if yes
+bool player::getHasMoved()
 {
-	if (HasMoved == true){ // if loop to inform the user that that unit has moved or not.
+	if (HasMoved == true){	// Check if data member has been set true
 		cout << "player has moved! \n";
 	}
 	else{
 		cout << "Unit has not moved! \n";
 	}
-	return HasMoved;
+	return HasMoved;	// return value of data member
 }
 
 int player::getHealth()
 {
-	return Health;
+	return Health;	// return value of data member
 }
 
 int player::getUnits()
 {
-	return Units;
+	return Units;	// return value of data member
 }
 
 string player::PlayerTurn()
 {
-	string playerturn, old_coordinate, new_coordinate, target;
+	string playerturn, old_coordinate, new_coordinate, target;	// Initialise variables to store keyboard inputs
 
 	cout << "What would you like to do this turn?" << endl;
-	cout << "[1] Move a unit" << endl << "[2] fire at the other player" << endl << "[3] end turn" << endl;
-	cin >> playerturn;
+	cout << "[1] Move a unit\n[2] fire at the other player\n[3] end turn" << endl;
+	cin >> playerturn;	// Store user-selected action in variable
 
 	try{
-		stoi(playerturn);
+		stoi(playerturn);	// Verify that the input can be converted to an integer
 	}
 	catch (...){
 		cout << "Error, invalid action..." << endl;
 		return "error";
 	}
 
-	switch (stoi(playerturn)) {
-	case 1:
+	switch (stoi(playerturn)) {	// Switch statement based on user-selected action
+	case 1:	// Case for movement
 		cout << "Enter the coordinate of the unit you want to move: ";
 		cin >> old_coordinate;
 		cout << "Enter the coordinate you want the unit to move to: ";
 		cin >> new_coordinate;
-		while (PlayerMove(old_coordinate, new_coordinate) == false) {
+		while (PlayerMove(old_coordinate, new_coordinate) == false) {	// Loop while unable to move
 			cout << "Enter the coordinate of the unit you want to move: ";
 			cin >> old_coordinate;
 			cout << "Enter the coordinate you want the unit to move to: ";
 			cin >> new_coordinate;
 		}
-		setHasMoved(true); // sets that the player will have moved
+		setHasMoved(true); // sets that the player has moved
 		return "move";
 		break;
 
-	case 2:
+	case 2:	// Case for firing at enemy
 		cout << "enter the coordinate to target: ";
 		cin >> target;
-		return target;
+		return target;	// Return coordinate to fire at
 		break;
 
-	case 3:
+	case 3:	// Case for ending turn
 		cout << "Turn ended..." << endl;
 		return "endturn";
 		break;
 
-	default:
+	default:	// Case to catch any errors/ incorrect inputs
 		cout << "Invalid command entered..." << endl;
 		return "error";
 		break;
 	}
 }
 
-void player::PlayerAttacked(string target) // Method called when opponent attacks a tile
+void player::PlayerAttacked(string target)
 {  
-	if (getHasUnit(target) != NULL) {
+	if (getHasUnit(target) != NULL) {	// Check if there is a unit in the input tile
 		cout << "Hit!" << endl;
-		setHasUnit(target, NULL);
-		setTiles(target, 'X');
+		setHasUnit(target, NULL);	// Set the value of 'HasUnit' at the input position to NULL
+		setTiles(target, 'X');	// Set the value of 'Tiles' at the input position to X
 	}
 	else {
 		cout << "Attack missed..." << endl;
@@ -163,18 +163,18 @@ void player::PlayerAttacked(string target) // Method called when opponent attack
 
 bool player::PlayerMove(string old_pos, string new_pos) // Method for user to move
 {
-	if (getHasUnit(old_pos) != NULL) { 
-		if (DistanceVerify(old_pos, new_pos) == true && TerrainVerify(old_pos, new_pos) == true) {
-			UpdateTiles(old_pos, new_pos);
-			return true;
+	if (getHasUnit(old_pos) != NULL) {	// Check if there is a unit at the old position
+		if (DistanceVerify(old_pos, new_pos) == true && TerrainVerify(old_pos, new_pos) == true) {	// Verify the distance and terrain 
+			UpdateTiles(old_pos, new_pos);	// Move the unit from the old to new position
+			return true;	// Return that the move was successful
 		}
 		else {
 			cout << "Verification failure, please re-enter coordinates..." << endl;
-			return false;
+			return false;	// Return that the move was unsuccessful
 		}
 	}
 	else {
 		cout << "no unit present at the coordinate" << endl;
-		return false;
+		return false;	// Return that the move was unsuccessful
 	}
 }
