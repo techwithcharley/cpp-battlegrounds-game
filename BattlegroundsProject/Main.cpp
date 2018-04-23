@@ -1,13 +1,23 @@
+///////////////////////////////////////////////////////////////
+/*
+Project - Battlegrounds Game
+Module - Main.cpp
+Last updated - 23/04/18
+Recent changes - Added move distance and difficulty user inputs
+Authors - James Wilcox and Andrew Weir
+*/
+///////////////////////////////////////////////////////////////
+
 #include "Player.h"	// Include the header file
 
 int main() {
 
 // *********** Variable initialisation *********** //
 
-	string userturn, playermode;	// Strings to store the user's action and the current number of human players
+	string userturn, playermode, difficulty, movedist;	// Strings to store the user's action and the current number of human players
 	bool endgame2 = false;	// Initialise the endgame condition for the second player (human/computer) to false
 	player player1, player2; // Create two instances of the player class
-	computer com(3);	// Create an instance of the computer class
+	computer com;	// Create an instance of the computer class
 	srand(time(0));	// Seed for the number generator
 
 // *********** Game setup *********** //
@@ -15,21 +25,30 @@ int main() {
 	do{	// Run at least once
 		cout << "Would you like:\n[1] Single-player\n[2] Multi-player" << endl;	// Ask user to select number of players
 		cin >> playermode;	// Store user input within playermode variable
-	} while ((playermode.find("1") == false || playermode.find("2") == false) && playermode.size() > 1 );	// Conditions to verify the input
+		do{
+			cout << "How many tiles would you like unit to be able to move?: ";
+			cin >> movedist;
+		} while (player1.setMoveDistance(movedist) == false);
+	} while ((playermode.find("1") == false || playermode.find("2") == false) && playermode.size() > 1 );	// Verify the input
 
 	if (playermode == "1"){	// Check if the user has selected single-player
 		player1.setMapSize();	// Initialise the map for player 1
-		player1.setMoveDistance(2);	// Set the maximum movement distance for player 1
+		player1.setMoveDistance(movedist);	// Set the maximum movement distance for player 1
+		cout << "What difficulty setting would you like for the computer?:\n[1] Easy\n[2] Medium\n[3] Hard" << endl;
+		cin >> difficulty;
+		do{
+			com.setDifficulty(difficulty);
+		} while (com.setDifficulty(difficulty) == false);
 		com.setTiles_Size(player1.getTiles_Size());	// Set the map size for the computer to that of player 1
 		com.robot.setTiles_Size(player1.getTiles_Size());	// Set the map size for the computer to that of player 1
-		com.robot.setMoveDistance(2);	// Set the maximum movement distance for the computer
+		com.robot.setMoveDistance(movedist);	// Set the maximum movement distance for the computer
 		com.MapGen();	// Generate the map for the computer
 	}
 	else if (playermode == "2"){	// Check if the user has selected multi-player
 		player1.setMapSize();	// Initialise the map for player 1
 		player2.setTiles_Size(player1.getTiles_Size());	// Set the map size for player 2 to that of player 1
 		player2.MapGen();	// Generate the map for player 2
-		player2.setMoveDistance(2);	// Set the maximum movement distance for player 2
+		player2.setMoveDistance(movedist);	// Set the maximum movement distance for player 2
 	}
 
 // *********** Unit placement *********** //
@@ -39,6 +58,8 @@ int main() {
 	player1.placeUnits(3);	// Call the method to place the user's units on the map
 	player1.getTiles();	// Output the populated map to the user
 	player1.EndTurn();	// Clear the console for the next player
+	cout << "Swap control of the console to player 2..." << endl;
+	player1.EndTurn();
 	
 	if (playermode == "1"){	// Check if the user has selected single-player
 		cout << "Computer: Unit Placement" << endl;
@@ -46,6 +67,8 @@ int main() {
 		com.placeComUnits(3);	// Place the computer's units on the map
 		com.getTiles();	// Output the populated computer map **Testing only**
 		com.EndTurn();	// Clear the console **testing only**
+		cout << "Swap control of the console to player 1..." << endl;
+		com.EndTurn();
 	}
 	else if (playermode == "2"){	// Check if the user has selected multi-player
 		cout << "Player 2: Unit Placement" << endl;
@@ -53,6 +76,8 @@ int main() {
 		player2.placeUnits(3);	// Call the method to place the user's units on the map
 		player2.getTiles();	// Output the populated map to the user
 		player2.EndTurn();	// Clear the console for the next player
+		cout << "Swap control of the console to player 1..." << endl;
+		player2.EndTurn();
 	}
 
 // *********** Turn iteration *********** //
@@ -75,6 +100,8 @@ int main() {
 			}
 		}
 		player1.EndTurn();	// Clear the console for the next player
+		cout << "Swap control of the console to player 2..." << endl;
+		player1.EndTurn();
 
 		if (playermode == "1") {
 			endgame2 = com.CheckEndGame();	// Check if all computer units have been eliminated
@@ -93,19 +120,23 @@ int main() {
 					player1.PlayerAttacked(userturn);	// Check if the attack has hit player 1
 				}
 				com.EndTurn();	// Clear the console for the next player
+				cout << "Swap control of the console to player 1..." << endl;
+				com.EndTurn();
 			}
 			else if (playermode == "2") {	// Check if the user has selected multi-player
 				cout << "Player 2: Turn" << endl;
 				player2.getTiles();	// Display player 2's map
 
 				do {	// Run at least once
-					userturn = player1.PlayerTurn();	// Allow the user to select an action
+					userturn = player2.PlayerTurn();	// Allow the user to select an action
 				} while (userturn == "error");	// Loop if an invalid action is selected
 
 				if (player2.BoardToArray(userturn) == true) {	// Check if userturn is a valid board coordinate
 					player1.PlayerAttacked(userturn);	// Check if the attack has hit player 1
 				}
 				player2.EndTurn();	// Clear the console for the next player
+				cout << "Swap control of the console to player 1..." << endl;
+				player2.EndTurn();
 			}
 		}
 	}

@@ -1,13 +1,39 @@
+///////////////////////////////////////////////////////////////
+/*
+Project - Battlegrounds Game
+Module - Computer.cpp
+Last updated - 23/04/18
+Recent changes - Added setter and getter for Difficulty
+Author - James Wilcox
+*/
+///////////////////////////////////////////////////////////////
+
 #include "Player.h"
 
-computer::computer(int diff)
+computer::computer()
 {
-	difficulty = diff;
+
 }
 
 computer::~computer()
 {
 	// Still to be implemented
+}
+
+bool computer::setDifficulty(string diff)
+{
+	try{
+		Difficulty = stoi(diff);
+	}
+	catch (...){
+		return false;
+	}
+	return true;
+}
+
+int computer::getDifficulty()
+{
+	return Difficulty;
 }
 
 void computer::placeComUnits(int num_units)
@@ -40,7 +66,7 @@ void computer::ComAttacked(string target)
 bool computer::ComMove(string old_pos, string new_pos)
 {
 	if (getHasUnit(old_pos) != NULL) {	// Check if a unit is present in the tile
-		if (DistanceVerify(old_pos, new_pos) == true && TerrainVerify(old_pos, new_pos) == true) {	// Check that the terrain and distance are valid
+		if (DistanceVerify(old_pos, new_pos) == true && TerrainVerify(old_pos, new_pos) == true) {	// Verify the terrain and distance
 			UpdateTiles(old_pos, new_pos);	// Update the 'Tiles' array with the unit movement
 			return true;	// Return that the move was successful
 		}
@@ -57,7 +83,7 @@ string computer::ComTurn()
 {
 	int action;
 
-	switch (difficulty) {
+	switch (Difficulty) {
 	case 1:
 		action = rand() % 6;	// Generate a value between 0 and 5
 		break;

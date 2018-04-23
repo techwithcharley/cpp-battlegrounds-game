@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////
+/*
+Project - Battlegrounds Game
+Module - Map.cpp
+Last updated - 23/04/18
+Recent changes - Changed setMoveDistance input to string
+Author - James Wilcox
+*/
+///////////////////////////////////////////////////////////////
+
 #include "Player.h"
 
 Map::Map()
@@ -161,9 +171,15 @@ bool Map::DistanceVerify(string old_pos, string new_pos) // Verifies that the us
 	}
 }
 
-void Map::setMoveDistance(int dist)
+bool Map::setMoveDistance(string dist)
 {
-	MoveDistance = dist;	// Set the data member to the input value
+	try{
+		MoveDistance = stoi(dist);	// Set the data member to the input value
+	}
+	catch (...){
+		return false;
+	}
+	return true;
 }
 
 bool Map::setHasUnit(string position, char type)

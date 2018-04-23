@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////
+/*
+Project - Battlegrounds Game
+Module - Player.h
+Last updated - 22/04/18
+Recent changes - Added methods to alter Difficulty
+Authors - James Wilcox and Andrew Weir
+*/
+///////////////////////////////////////////////////////////////
+
 #ifndef PLAYER_HPP_
 #define PLAYER_HPP_
 
@@ -30,7 +40,7 @@ public:
 	bool getTerrain(string);	// Method to access the data of a specific tile's terrain type
 	bool TerrainVerify(string, string);	// Method to ensure that a unit is moving to a valid tile
 	bool DistanceVerify(string, string);	// Method to ensure that a unit is moving a valid distance
-	void setMoveDistance(int);	// Method to set the maximum movement distance for the player
+	bool setMoveDistance(string);	// Method to set the maximum movement distance for the player
 	bool setHasUnit(string, char);	// Method to set members of the HasUnit array
 	char getHasUnit(string);	// Method to test if a specific tile contains a unit
 	void setCoord(int, int);	// Method to manually set the coord data member
@@ -65,12 +75,14 @@ public:
 
 class computer : public Map {
 private:
-	int difficulty;
+	int Difficulty;
 
 public:
 	player robot;	// Instance of player class to enable code re-use
-	computer(int);	// Constructor for computer class
+	computer();	// Constructor for computer class
 	virtual ~computer();	// Destructor for computer class
+	bool setDifficulty(string);
+	int getDifficulty();
 	void placeComUnits(int);	// Method to place the computer units on the map
 	void ComAttacked(string);	// Method to test if an opponent shot hits a unit
 	bool ComMove(string, string);	// Method to allow the computer to move its units

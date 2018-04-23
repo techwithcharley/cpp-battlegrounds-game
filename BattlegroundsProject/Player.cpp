@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////
+/*
+Project - Battlegrounds Game
+Module - Player.cpp
+Last updated - 22/04/18
+Recent changes - Fully commented code script
+Author - Andrew Weir
+*/
+///////////////////////////////////////////////////////////////
+
 #include "Player.h"
 
 player::player() 
