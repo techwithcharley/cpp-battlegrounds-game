@@ -3,7 +3,7 @@
 Project - Battlegrounds Game
 Module - Map.cpp
 Last updated - 23/04/18
-Recent changes - Changed setMoveDistance input to string
+Recent changes - all inputs validated ~hopefully 
 Author - James Wilcox
 */
 ///////////////////////////////////////////////////////////////
@@ -17,22 +17,27 @@ Map::Map()
 
 Map::~Map()
 {
-	// Still to be implemented
+
 }
 
 void Map::setMapSize()
 {
-	int map_size;	// Variable to store user-selected map size
-	cout << "Enter desired map size (max 9): ";	// Ask user to input desired map size
-	cin >> map_size;	// Store keyboard input
+	int map_size = 0;	// Variable to store user-selected map size
 
-	while (map_size > 9) {	// Loop while user input is too large
-		cout << "Size too large, please enter new value: ";	// Ask user to input a new size
-		cin >> map_size;	// Store new user input
+	do {
+		cout << "Enter desired map size (max 9): " << endl;	// Ask user to input desired map size
+		cin >> map_size;
+		while (map_size > 9 || map_size < 2) { // Store keyboard input
+			cout << "Please enter an integer(max 9) enter a correct value twice?" << endl;
+			cin.clear();
+			cin.ignore(100, '\n');
+			cin >> map_size;
+		}
+	} while (!(cin >> map_size));
+		setTiles_Size(map_size);	// Set data member 'Tiles_Size' to new value
+		MapGen();	// Populate 'Tiles' and 'Terrain' vectors with hardcoded values
 	}
-	setTiles_Size(map_size);	// Set data member 'Tiles_Size' to new value
-	MapGen();	// Populate 'Tiles' and 'Terrain' vectors with hardcoded values
-}
+
 
 void Map::MapGen()
 {
